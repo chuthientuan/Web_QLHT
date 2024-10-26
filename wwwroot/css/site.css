@@ -18,5 +18,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url('../images/background_login.jpg'); /* Adjust the path as necessary */
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center the image */
 }
