@@ -32,25 +32,19 @@ namespace BTL.Controllers
 
         // POST: /Account/DangNhap
         [HttpPost]
-        public async Task<IActionResult> DangNhap(string username, string password)
+        public async Task<IActionResult> Index(string username, string password)
         {
             // Replace this with your user validation logic
             bool isValidUser = ValidateUser(username, password);
 
             if (isValidUser)
             {
-                // Set user session or claims here as necessary
-                HttpContext.Session.SetString("Username", username); // Example of setting a session variable
-
                 // Redirect to the product index page on successful login
-                return RedirectToAction();
+                return RedirectToAction("Index", "Product");
             }
-
-            // Return to the login view with an error message if login fails
-            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            ModelState.AddModelError(string.Empty, "Tên tài kho?n ho?c m?t kh?u không ?úng.");
             return View();
         }
-
         // Simulated user validation (replace with actual authentication logic)
         private bool ValidateUser(string username, string password)
         {
