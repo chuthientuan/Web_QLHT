@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BTL.Models;
 
 public partial class LoaiThuoc
 {
+    [Key]
     public int MaLt { get; set; }
 
     public string? TenLt { get; set; }

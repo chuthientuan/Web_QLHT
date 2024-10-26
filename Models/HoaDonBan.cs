@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BTL.Models;
 
 public partial class HoaDonBan
 {
+    [Key]
     public int MaHdb { get; set; }
 
     public DateTime? NgayBan { get; set; }

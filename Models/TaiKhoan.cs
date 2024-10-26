@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BTL.Models;
 
 public partial class TaiKhoan
 {
+    [Key]
     public int MaTk { get; set; }
 
     public string HoTen { get; set; } = null!;
