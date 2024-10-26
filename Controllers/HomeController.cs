@@ -42,9 +42,10 @@ namespace BTL.Controllers
                 // Redirect to the product index page on successful login
                 return RedirectToAction("Index", "Product");
             }
-            ModelState.AddModelError(string.Empty, "Tên tài kho?n ho?c m?t kh?u không ?úng.");
+            ModelState.AddModelError(string.Empty, "Wrong username or password.");
             return View();
         }
+
         // Simulated user validation (replace with actual authentication logic)
         private bool ValidateUser(string username, string password)
         {
@@ -52,5 +53,38 @@ namespace BTL.Controllers
             return username == "admin" && password == "123"; // Example credentials
         }
 
+        [HttpGet]
+        public IActionResult DangKy()
+        {
+            return View();
+        }
+
+        // POST: /Account/DangKy
+        [HttpPost]
+        public IActionResult DangKy(string username, string email, string password, string confirmPassword)
+        {
+            if (password != confirmPassword)
+            {
+                ModelState.AddModelError(string.Empty, "Wrong password.");
+                return View();
+            }
+
+            // Simulate user registration logic (replace with actual registration logic)
+            if (RegisterUser(username, email, password))
+            {
+                // Redirect to the login page on successful registration
+                return RedirectToAction("DangNhap");
+            }
+
+            ModelState.AddModelError(string.Empty, "Sign up error.");
+            return View();
+        }
+
+        // Simulated user registration logic (replace with actual registration logic)
+        private bool RegisterUser(string username, string email, string password)
+        {
+            // Here, you would typically save the user credentials to a database
+            return true; // Example successful registration
+        }
     }
 }
