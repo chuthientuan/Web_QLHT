@@ -40,7 +40,7 @@ namespace BTL.Controllers
             if (isValidUser)
             {
                 // Redirect to the product index page on successful login
-                return RedirectToAction("Index", "Product");
+                return RedirectToAction("Index", "SanPhams");
             }
             ModelState.AddModelError(string.Empty, "Wrong username or password.");
             return View();
