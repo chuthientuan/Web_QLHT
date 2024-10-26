@@ -58,10 +58,5 @@ namespace BTL.Controllers
             return username == "admin" && password == "123"; // Example credentials
         }
 
-        [HttpGet]
-        public IActionResult DangKy()
-        {
-            return View();
-        }
     }
 }
