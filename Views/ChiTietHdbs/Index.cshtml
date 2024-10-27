@@ -12,36 +12,30 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Slban)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KhuyenMai)
-            </th>
+        <tr>   
             <th>
                 @Html.DisplayNameFor(model => model.MaHdbNavigation)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MaSpNavigation)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Slban)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Slban)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KhuyenMai)
-            </td>
+        <tr>  
             <td>
                 @Html.DisplayFor(modelItem => item.MaHdbNavigation.MaHdb)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MaSpNavigation.MaSp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slban)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
