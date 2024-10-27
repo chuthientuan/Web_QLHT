@@ -1,3 +1,6 @@
+using BTL.Models; // Đảm bảo namespace đúng
+using Microsoft.EntityFrameworkCore;
+
 namespace BTL
 {
     public class Program
@@ -6,16 +9,23 @@ namespace BTL
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Đăng ký DbContext
+            builder.Services.AddDbContext<QlhieuThuocContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // Thêm dịch vụ MVC
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            // Cấu hình middleware
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
