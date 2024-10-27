@@ -11,7 +11,7 @@ namespace BTL
 
             // Đăng ký DbContext
             builder.Services.AddDbContext<QlhieuThuocContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("BTLContext")));
 
             // Thêm dịch vụ MVC
             builder.Services.AddControllersWithViews();
