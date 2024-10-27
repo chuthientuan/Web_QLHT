@@ -15,8 +15,6 @@ public partial class TaiKhoan
 
     public string TenDangNhap { get; set; } = null!;
 
-    public string TrangThai { get; set; } = null!;
-
     public string MatKhau { get; set; } = null!;
 
     public string? Email { get; set; }

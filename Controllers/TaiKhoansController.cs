@@ -53,7 +53,7 @@ namespace BTL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaTk,HoTen,Role,TenDangNhap,TrangThai,MatKhau,Email,DienThoai")] TaiKhoan taiKhoan)
+        public async Task<IActionResult> Create([Bind("MaTk,HoTen,Role,TenDangNhap,MatKhau,Email,DienThoai")] TaiKhoan taiKhoan)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace BTL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaTk,HoTen,Role,TenDangNhap,TrangThai,MatKhau,Email,DienThoai")] TaiKhoan taiKhoan)
+        public async Task<IActionResult> Edit(int id, [Bind("MaTk,HoTen,Role,TenDangNhap,MatKhau,Email,DienThoai")] TaiKhoan taiKhoan)
         {
             if (id != taiKhoan.MaTk)
             {
