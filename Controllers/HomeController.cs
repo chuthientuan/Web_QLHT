@@ -1,5 +1,6 @@
 using BTL.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace BTL.Controllers
@@ -7,10 +8,12 @@ namespace BTL.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        QlhieuThuocContext db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, QlhieuThuocContext context)
         {
             _logger = logger;
+            db = context;
         }
 
         public IActionResult Index()
@@ -34,13 +37,19 @@ namespace BTL.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(string username, string password)
         {
+            var user = await db.TaiKhoans.SingleOrDefaultAsync(
+                    u => u.TenDangNhap == username && u.MatKhau == password);
             // Replace this with your user validation logic
-            bool isValidUser = ValidateUser(username, password);
-
-            if (isValidUser)
+            if (user != null)
             {
-                // Redirect to the product index page on successful login
-                return RedirectToAction("Index", "SanPhams");
+                if (user.Role == 1) // Assuming '1' represents admin
+                {
+                    return RedirectToAction("Index", "SanPhams");
+                }
+                else // Redirect to customer page if not admin
+                {
+                    return RedirectToAction("Index", "HoaDonBans");
+                }
             }
             ModelState.AddModelError(string.Empty, "Wrong username or password.");
             return View();
@@ -61,19 +70,17 @@ namespace BTL.Controllers
 
         // POST: /Account/DangKy
         [HttpPost]
-        public IActionResult DangKy(string username, string email, string password, string confirmPassword)
+        public async Task<IActionResult> DangKy(string username, string email, string password, string confirmPassword)
         {
             if (password != confirmPassword)
             {
-                ModelState.AddModelError(string.Empty, "Wrong password.");
+                ModelState.AddModelError(string.Empty, "Password and confirmation do not match.");
                 return View();
             }
 
-            // Simulate user registration logic (replace with actual registration logic)
-            if (RegisterUser(username, email, password))
+            if (await RegisterUserAsync(username, email, password))
             {
-                // Redirect to the login page on successful registration
-                return RedirectToAction("DangNhap");
+                return RedirectToAction("Index");
             }
 
             ModelState.AddModelError(string.Empty, "Sign up error.");
@@ -81,10 +88,25 @@ namespace BTL.Controllers
         }
 
         // Simulated user registration logic (replace with actual registration logic)
-        private bool RegisterUser(string username, string email, string password)
+        private async Task<bool> RegisterUserAsync(string username, string email, string password)
         {
-            // Here, you would typically save the user credentials to a database
-            return true; // Example successful registration
+            if (await db.TaiKhoans.AnyAsync(u => u.TenDangNhap == username || u.Email == email))
+            {
+                ModelState.AddModelError(string.Empty, "Username or email already exists.");
+                return false;
+            }
+
+            var newUser = new TaiKhoan
+            {
+                HoTen = username, // Or however you'd like to set this
+                TenDangNhap = username,
+                MatKhau = password,
+                Email = email,
+                Role = 0 // Automatically set Role to 0
+            };
+            db.TaiKhoans.Add(newUser);
+            await db.SaveChangesAsync();
+            return true;
         }
     }
 }
