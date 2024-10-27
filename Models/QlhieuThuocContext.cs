@@ -32,7 +32,17 @@ public partial class QlhieuThuocContext : DbContext
     public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=V\\SQLEXPRESS;Database=QLHieuThuoc;Trusted_Connection=True;User=sa,Password=021104;TrustServerCertificate=True");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("QlhieuThuocContext"));
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
