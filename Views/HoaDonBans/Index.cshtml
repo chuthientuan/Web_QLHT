@@ -26,10 +26,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.MaTkNavigation.MaTk)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.NgayBan)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaTkNavigation.MaTk)
+                @Html.DisplayFor(modelItem => item.TrangThai)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MaHdb">Edit</a> |

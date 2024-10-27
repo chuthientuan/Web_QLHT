@@ -32,7 +32,17 @@ public partial class QlhieuThuocContext : DbContext
     public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=V\\SQLEXPRESS;Database=QLHieuThuoc;Trusted_Connection=True;User=sa,Password=021104;TrustServerCertificate=True");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("QlhieuThuocContext"));
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -46,7 +56,6 @@ public partial class QlhieuThuocContext : DbContext
                 .ValueGeneratedOnAdd()
                 .HasColumnName("MaHDB");
             entity.Property(e => e.MaSp).HasColumnName("MaSP");
-            entity.Property(e => e.KhuyenMai).HasMaxLength(100);
             entity.Property(e => e.Slban).HasColumnName("SLBan");
 
             entity.HasOne(d => d.MaHdbNavigation).WithMany(p => p.ChiTietHdbs)
@@ -70,7 +79,6 @@ public partial class QlhieuThuocContext : DbContext
                 .ValueGeneratedOnAdd()
                 .HasColumnName("MaHDN");
             entity.Property(e => e.MaSp).HasColumnName("MaSP");
-            entity.Property(e => e.KhuyenMai).HasMaxLength(100);
             entity.Property(e => e.Slnhap).HasColumnName("SLNhap");
 
             entity.HasOne(d => d.MaHdnNavigation).WithMany(p => p.ChiTietHdns)
@@ -93,7 +101,7 @@ public partial class QlhieuThuocContext : DbContext
             entity.Property(e => e.MaHdb).HasColumnName("MaHDB");
             entity.Property(e => e.MaTk).HasColumnName("MaTK");
             entity.Property(e => e.NgayBan).HasColumnType("datetime");
-
+            entity.Property(e => e.TrangThai).HasMaxLength(30);
             entity.HasOne(d => d.MaTkNavigation).WithMany(p => p.HoaDonBans)
                 .HasForeignKey(d => d.MaTk)
                 .HasConstraintName("FK_HoaDonBan_TaiKhoan");
@@ -175,7 +183,7 @@ public partial class QlhieuThuocContext : DbContext
             entity.Property(e => e.HoTen).HasMaxLength(50);
             entity.Property(e => e.MatKhau).HasMaxLength(20);
             entity.Property(e => e.TenDangNhap).HasMaxLength(30);
-            entity.Property(e => e.TrangThai).HasMaxLength(30);
+            
         });
 
         OnModelCreatingPartial(modelBuilder);

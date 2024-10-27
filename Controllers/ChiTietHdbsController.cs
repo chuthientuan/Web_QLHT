@@ -58,7 +58,7 @@ namespace BTL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaHdb,MaSp,Slban,KhuyenMai")] ChiTietHdb chiTietHdb)
+        public async Task<IActionResult> Create([Bind("MaHdb,MaSp,Slban")] ChiTietHdb chiTietHdb)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace BTL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaHdb,MaSp,Slban,KhuyenMai")] ChiTietHdb chiTietHdb)
+        public async Task<IActionResult> Edit(int id, [Bind("MaHdb,MaSp,Slban")] ChiTietHdb chiTietHdb)
         {
             if (id != chiTietHdb.MaHdb)
             {

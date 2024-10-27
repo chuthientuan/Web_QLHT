@@ -17,9 +17,6 @@
                 @Html.DisplayNameFor(model => model.Slnhap)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.KhuyenMai)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.MaHdnNavigation)
             </th>
             <th>
@@ -30,18 +27,15 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Slnhap)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KhuyenMai)
-            </td>
+        <tr>   
             <td>
                 @Html.DisplayFor(modelItem => item.MaHdnNavigation.MaHdn)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MaSpNavigation.MaSp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slnhap)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
