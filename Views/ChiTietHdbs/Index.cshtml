@@ -14,10 +14,10 @@
     <thead>
         <tr>   
             <th>
-                @Html.DisplayNameFor(model => model.MaHdbNavigation)
+                @Html.DisplayNameFor(model => model.MaHdb)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MaSpNavigation)
+                @Html.DisplayNameFor(model => model.MaSp)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Slban)
@@ -29,10 +29,10 @@
 @foreach (var item in Model) {
         <tr>  
             <td>
-                @Html.DisplayFor(modelItem => item.MaHdbNavigation.MaHdb)
+                @Html.DisplayFor(modelItem => item.MaHdb)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaSpNavigation.MaSp)
+                @Html.DisplayFor(modelItem => item.MaSp)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Slban)

@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MaNccNavigation)
+                @Html.DisplayNameFor(model => model.MaNcc)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NgayNhap)
@@ -26,10 +26,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NgayNhap)
+                @Html.DisplayFor(modelItem => item.MaNccNavigation.MaNcc)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaNccNavigation.MaNcc)
+                @Html.DisplayFor(modelItem => item.NgayNhap)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MaHdn">Edit</a> |
