@@ -1,3 +1,6 @@
+using BTL.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace BTL
 {
     public class Program
@@ -10,7 +13,8 @@ namespace BTL
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
-
+            builder.Services.AddDbContext<QlhieuThuocContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("PharmacyDatabase")));
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
