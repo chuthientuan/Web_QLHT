@@ -1,32 +1,28 @@
+/* Base styles */
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
     margin-bottom: 60px;
 }
 
-.background_login {
+/* Background styles */
+#background_login {
     background-image: url('../images/background_login.jpg');
     background-size: cover;
     background-position: center;
 }
 
+/* Layout styles */
 .wrapper {
     display: flex;
 }
@@ -54,6 +50,12 @@ body {
         min-width: 260px;
     }
 
+header, footer {
+    height: 50px;
+    background-color: #007bff;
+}
+
+/* Sidebar styles */
 .toggle-btn {
     background-color: transparent;
     cursor: pointer;
@@ -95,12 +97,7 @@ a.sidebar-link {
     border-left: 3px solid transparent;
 }
 
-.sidebar-link i {
-    font-size: 1.1rem;
-    margin-right: .75rem;
-}
-
-a.sidebar-link:hover {
+.sidebar-link:hover {
     background-color: rgba(255, 255, 255, .075);
     border-left: 3px solid #3b7ddd;
 }
@@ -109,6 +106,7 @@ a.sidebar-link:hover {
     position: relative;
 }
 
+/* Dropdown styles */
 #sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
     position: absolute;
     top: 0;
@@ -126,89 +124,14 @@ a.sidebar-link:hover {
     opacity: 1;
 }
 
-#sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
-    border: solid;
-    border-width: 0 .075rem .075rem 0;
-    content: "";
-    display: inline-block;
-    padding: 2px;
-    position: absolute;
-    right: 1.5rem;
-    top: 1.4rem;
-    transform: rotate(-135deg);
-    transition: all .2s ease-out;
-}
-
-#sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
-    transform: rotate(45deg);
-    transition: all .2s ease-out;
-}
-
-header {
-    height: 50px;
-    background-color: #007bff;
-}
-
-footer {
-    margin-top: auto;
-    height: 50px;
-    background-color: #007bff;
-}
-
-.container {
-    /* max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-     overflow: hidden; */
-    margin-left: 100px;
-    padding: 20px;
-    width: calc(100% -250px);
-    background-color: #ffffff; /* Màu nền nội dung */
-    border-radius: 20px; /* Bo góc viền */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo bóng cho viền */
-    overflow: hidden; /* Ẩn các phần tử bên trong tràn ra ngoài */
-}
-
-h1 {
-    font-size: 24px;
-    text-align: center;
-}
-
-h2 {
-    margin-top: 50px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-    .table th, .table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: center;
-    }
-
-    .table th {
-        background-color: #007bff;
-        color: white;
-    }
-
+/* Button styles */
 .btn {
     padding: 10px 15px;
     margin: 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none;
     color: white;
-    margin-right: 10px;
 }
 
 .btn-primary {
@@ -231,6 +154,7 @@ h2 {
     background-color: #6c757d;
 }
 
+/* Form styles */
 .form-group {
     margin-bottom: 15px;
 }
@@ -247,6 +171,45 @@ h2 {
     border-radius: 4px;
 }
 
+/* Header and footer styles */
+h1 {
+    font-size: 24px;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Table styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+    .table th, .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .table th {
+        background-color: #007bff;
+        color: white;
+    }
+
+/* Miscellaneous */
+.container {
+    margin: auto;
+    padding: 20px;
+    width: 40%;
+    background-color: #ffffff; /* Màu nền nội dung */
+    border-radius: 20px; /* Bo góc viền */
+}
+
 .dl-horizontal dt {
     font-weight: bold;
 }
@@ -257,12 +220,6 @@ h2 {
 
 .product-table {
     margin-top: 20px; /* Thay đổi giá trị nếu bạn muốn khoảng cách lớn hơn hoặc nhỏ hơn */
-}
-
-
-
-.form-group {
-    margin-bottom: 15px; /* Khoảng cách giữa các trường */
 }
 
 .row {
@@ -282,4 +239,13 @@ h2 {
 
 .button-group {
     margin-top: 20px; /* Khoảng cách trên nút lưu và hủy */
+}
+
+/* Focus styles */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
