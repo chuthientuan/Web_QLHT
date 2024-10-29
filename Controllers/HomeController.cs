@@ -46,7 +46,7 @@ namespace BTL.Controllers
                 }
                 else 
                 {
-                    return RedirectToAction("Index", "HoaDonBans");
+                    return RedirectToAction("Index", "HomeKH");
                 }
             }
             ModelState.AddModelError(string.Empty, "Sai tên đăng nhập hoặc mật khẩu.");
