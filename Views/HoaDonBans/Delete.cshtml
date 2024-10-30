@@ -13,10 +13,13 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MaTk)
+            Tên thuốc
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MaTk)
+            @if (Model.ChiTietHdbs.Any())
+            {
+                @Html.DisplayFor(modelItem => Model.ChiTietHdbs.First().MaSpNavigation.TenSp)
+            }
         </dd>
         <dt class="col-sm-2">
             Tên khách hàng

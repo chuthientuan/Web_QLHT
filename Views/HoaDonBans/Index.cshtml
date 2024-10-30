@@ -30,7 +30,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MaHdb)
+                @if (item.ChiTietHdbs.Any())
+                {
+                    @Html.DisplayFor(modelItem => item.ChiTietHdbs.First().MaSpNavigation.TenSp)
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MaTkNavigation.HoTen)
