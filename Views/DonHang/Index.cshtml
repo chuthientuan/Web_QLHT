@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BTL.Models.ChiTietHdb>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/LayoutKH.cshtml";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaHdb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaSp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Slban)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaHdb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Slban)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

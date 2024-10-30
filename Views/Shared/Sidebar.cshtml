@@ -1,48 +1,49 @@
-﻿<div id="sidebar">
+﻿<aside id="sidebar">
     <div class="d-flex">
-        <button class="toggle-btn" type="button">
-            <i class="fas fa-th"></i>
-        </button>
-        <div class="sidebar-logo">
-            <a href="#">Quản lý hiệu thuốc</a>
-        </div>
+        <a class="sidebar-link toggle-btn">
+            <i class="bi bi-grid"></i>
+        </a>
+        <a class="sidebar-link">
+            <img src="images/logo.svg" alt="Logo" class="header-img" style="width: 10rem; cursor: pointer;">
+        </a>
+
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-item">
-            <a asp-controller="Shop" asp-action="Index" class="sidebar-link">
-                <i class="fas fa-shop"></i>
-                <span>Cửa hàng</span>
+            <a asp-controller="SanPhams" class="sidebar-link">
+                <i class="bi bi-box"></i>
+                <span>Quản lý sản phẩm</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a asp-controller="User" asp-action="Index" class="sidebar-link">
-                <i class="fas fa-user"></i>
-                <span>Hồ sơ</span>
+            <a asp-controller="TaiKhoans" class="sidebar-link">
+                <i class="bi bi-person"></i>
+                <span>Quản lý người dùng</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a asp-controller="Cart" asp-action="ManageCart" class="sidebar-link">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Giỏ hàng</span>
+            <a asp-controller="HoaDonBans" class="sidebar-link">
+                <i class="bi bi-archive-fill"></i>
+                <span>Quản lý đơn hàng bán</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a asp-controller="Order" asp-action="CheckOrders" class="sidebar-link">
-                <i class="fas fa-box"></i>
-                <span>Kiểm tra đơn hàng</span>
+            <a asp-controller="HoaDonNhaps" class="sidebar-link">
+                <i class="bi bi-file-earmark-arrow-down"></i> 
+                <span>Quản lý đơn hàng nhập</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a asp-controller="Notification" asp-action="Index" class="sidebar-link">
-                <i class="fas fa-bell"></i>
-                <span>Thông báo</span>
+            <a asp-controller="Settings" class="sidebar-link">
+                <i class="bi bi-graph-up-arrow"></i>
+                <span>Báo cáo</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a asp-controller="Home" class="sidebar-link">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Đăng xuất</span>
             </a>
         </li>
     </ul>
-    <div class="sidebar-footer">
-        <a asp-controller="Account" asp-action="Logout" class="sidebar-link">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Đăng xuất</span>
-        </a>
-    </div>
-</div>
+</aside>

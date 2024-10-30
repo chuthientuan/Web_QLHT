@@ -5,53 +5,50 @@
     Layout = "~/Views/Shared/MyLayout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Tạo Tài Khoản</h1>
 
-<h4>TaiKhoan</h4>
+<h4 style="margin-left: 0.5rem">Tài Khoản</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="ms-2 mx-2 col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="HoTen" class="control-label"></label>
+                <label asp-for="HoTen" class="control-label">Họ tên</label>
                 <input asp-for="HoTen" class="form-control" />
                 <span asp-validation-for="HoTen" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Role" class="control-label"></label>
+                <label asp-for="Role" class="control-label">Chức danh</label>
                 <input asp-for="Role" class="form-control" />
                 <span asp-validation-for="Role" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TenDangNhap" class="control-label"></label>
+                <label asp-for="TenDangNhap" class="control-label">Tên đăng nhập</label>
                 <input asp-for="TenDangNhap" class="form-control" />
                 <span asp-validation-for="TenDangNhap" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MatKhau" class="control-label"></label>
+                <label asp-for="MatKhau" class="control-label">Mật khẩu</label>
                 <input asp-for="MatKhau" class="form-control" />
                 <span asp-validation-for="MatKhau" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+                <label asp-for="Email" class="control-label">Email</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DienThoai" class="control-label"></label>
+                <label asp-for="DienThoai" class="control-label">Số điện thoại</label>
                 <input asp-for="DienThoai" class="form-control" />
                 <span asp-validation-for="DienThoai" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Tạo" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-action="Index">Quay lại</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -36,8 +36,17 @@ namespace BTL.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(string username, string password)
         {
-            var user = await db.TaiKhoans.SingleOrDefaultAsync(
-                u => u.TenDangNhap == username && u.MatKhau == password);
+            var user = await db.TaiKhoans
+            .Select(t => new TaiKhoan
+            {
+                MaTk = t.MaTk,
+                HoTen = t.HoTen ?? "Unknown",
+                Role = t.Role,
+                TenDangNhap = t.TenDangNhap,
+                MatKhau = t.MatKhau,
+                Email = t.Email ?? "N/A",
+                DienThoai = t.DienThoai ?? "N/A"
+            }).SingleOrDefaultAsync(u => u.TenDangNhap == username && u.MatKhau == password);
             if (user != null)
             {
                 if (user.Role == 1)
@@ -46,7 +55,7 @@ namespace BTL.Controllers
                 }
                 else 
                 {
-                    return RedirectToAction("Index", "HoaDonBans");
+                    return RedirectToAction("Index", "HomeKH");
                 }
             }
             ModelState.AddModelError(string.Empty, "Sai tên đăng nhập hoặc mật khẩu.");

@@ -5,33 +5,32 @@
     Layout = "~/Views/Shared/MyLayout.cshtml";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>Danh Sách Tài Khoản</h1>
+<a asp-action="Create" class="btn btn-primary">Tạo mới</a>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.HoTen)
+                Họ Tên
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Role)
+                Chức Danh
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TenDangNhap)
+                Tên Đăng Nhập
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MatKhau)
+                Mật Khẩu
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                Email
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DienThoai)
+                Số Điện Thoại
             </th>
-            <th></th>
+            <th>
+                Chức năng
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -41,7 +40,14 @@
                 @Html.DisplayFor(modelItem => item.HoTen)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Role)
+                @if (item.Role == 0)
+                {
+                    <span>Khách hàng</span>
+                }
+                else if (item.Role == 1)
+                {
+                    <span>Admin</span>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TenDangNhap)
@@ -56,9 +62,9 @@
                 @Html.DisplayFor(modelItem => item.DienThoai)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MaTk">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaTk">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaTk">Delete</a>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.MaTk">Sửa</a> |
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.MaTk">Thông tin</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.MaTk">Xóa</a>
             </td>
         </tr>
 }

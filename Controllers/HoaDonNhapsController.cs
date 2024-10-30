@@ -21,7 +21,7 @@ namespace BTL.Controllers
         // GET: HoaDonNhaps
         public async Task<IActionResult> Index()
         {
-            var qlhieuThuocContext = _context.HoaDonNhaps.Include(h => h.MaNccNavigation);
+            var qlhieuThuocContext = _context.HoaDonNhaps.Include(h => h.MaNccNavigation).Include(c => c.ChiTietHdns);
             return View(await qlhieuThuocContext.ToListAsync());
         }
 
@@ -47,7 +47,7 @@ namespace BTL.Controllers
         // GET: HoaDonNhaps/Create
         public IActionResult Create()
         {
-            ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "MaNcc");
+            ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "TenNcc");
             return View();
         }
 

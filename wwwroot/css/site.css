@@ -1,285 +1,37 @@
+/* Base styles */
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    scroll-behavior: smooth; /* Optional: adds smooth scrolling */
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
     margin-bottom: 60px;
+    font-family: Arial, sans-serif; /* Optional: set a default font */
 }
 
-.background_login {
+/* Background styles */
+#background_login {
     background-image: url('../images/background_login.jpg');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat; /* Ensures the image does not repeat */
+    min-height: 100vh; /* Ensures full height of viewport */
 }
 
-.wrapper {
-    display: flex;
-}
-
-.main {
-    min-height: 100vh;
-    width: 100%;
-    overflow: hidden;
-    transition: all 0.35s ease-in-out;
-    background-color: #fafbfe;
-}
-
-#sidebar {
-    width: 70px;
-    min-width: 70px;
-    z-index: 1000;
-    transition: all .25s ease-in-out;
-    background-color: #007bff;
-    display: flex;
-    flex-direction: column;
-}
-
-    #sidebar.expand {
-        width: 260px;
-        min-width: 260px;
-    }
-
-.toggle-btn {
-    background-color: transparent;
-    cursor: pointer;
-    border: 0;
-    padding: 1rem 1.5rem;
-}
-
-    .toggle-btn i {
-        font-size: 1.5rem;
-        color: #FFF;
-    }
-
-.sidebar-logo {
-    margin: auto 0;
-}
-
-    .sidebar-logo a {
-        color: #FFF;
-        font-size: 1.15rem;
-        font-weight: 600;
-    }
-
-#sidebar:not(.expand) .sidebar-logo,
-#sidebar:not(.expand) a.sidebar-link span {
-    display: none;
-}
-
-.sidebar-nav {
-    padding: 2rem 0;
-    flex: 1 1 auto;
-}
-
-a.sidebar-link {
-    padding: .625rem 1.625rem;
-    color: #FFF;
-    display: block;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    border-left: 3px solid transparent;
-}
-
-.sidebar-link i {
-    font-size: 1.1rem;
-    margin-right: .75rem;
-}
-
-a.sidebar-link:hover {
-    background-color: rgba(255, 255, 255, .075);
-    border-left: 3px solid #3b7ddd;
-}
-
-.sidebar-item {
-    position: relative;
-}
-
-#sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
-    position: absolute;
-    top: 0;
-    left: 70px;
-    background-color: #3b7ddd;
-    padding: 0;
-    min-width: 15rem;
-    display: none;
-}
-
-#sidebar:not(.expand) .sidebar-item:hover .has-dropdown + .sidebar-dropdown {
-    display: block;
-    max-height: 15em;
-    width: 100%;
-    opacity: 1;
-}
-
-#sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
-    border: solid;
-    border-width: 0 .075rem .075rem 0;
-    content: "";
-    display: inline-block;
-    padding: 2px;
-    position: absolute;
-    right: 1.5rem;
-    top: 1.4rem;
-    transform: rotate(-135deg);
-    transition: all .2s ease-out;
-}
-
-#sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
-    transform: rotate(45deg);
-    transition: all .2s ease-out;
-}
-
-header {
-    height: 50px;
-    background-color: #007bff;
-}
-
-footer {
-    margin-top: auto;
-    height: 50px;
-    background-color: #007bff;
-}
-
-.container {
-    /* max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-     overflow: hidden; */
-    margin-left: 100px;
-    padding: 20px;
-    width: calc(100% -250px);
-    background-color: #ffffff; /* Màu nền nội dung */
-    border-radius: 20px; /* Bo góc viền */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo bóng cho viền */
-    overflow: hidden; /* Ẩn các phần tử bên trong tràn ra ngoài */
-}
-
-h1 {
-    font-size: 24px;
-    text-align: center;
-}
-
-h2 {
-    margin-top: 50px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-    .table th, .table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: center;
-    }
-
-    .table th {
-        background-color: #007bff;
-        color: white;
-    }
-
-.btn {
-    padding: 10px 15px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    color: white;
-    margin-right: 10px;
-}
-
-.btn-primary {
-    background-color: #007bff;
-}
-
-.btn-warning {
-    background-color: #ffc107;
-}
-
-.btn-danger {
-    background-color: #dc3545;
-}
-
-.btn-success {
-    background-color: #28a745;
-}
-
-.btn-secondary {
-    background-color: #6c757d;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-}
-
-.dl-horizontal dt {
-    font-weight: bold;
-}
-
-.dl-horizontal dd {
-    margin-bottom: 10px;
-}
-
-.product-table {
-    margin-top: 20px; /* Thay đổi giá trị nếu bạn muốn khoảng cách lớn hơn hoặc nhỏ hơn */
-}
-
-
-
-.form-group {
-    margin-bottom: 15px; /* Khoảng cách giữa các trường */
-}
-
-.row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px; /* Khoảng cách giữa hàng */
-}
-
-.col {
-    flex: 1;
-    margin-right: 20px; /* Thay đổi khoảng cách giữa các cột */
-}
-
-    .col:last-child {
-        margin-right: 0; /* Không khoảng cách cho cột cuối */
-    }
-
-.button-group {
-    margin-top: 20px; /* Khoảng cách trên nút lưu và hủy */
+/* Card styles */
+.card-body {
+    background-color: #ffffff; /* White background for card body */
+    padding: 2rem; /* Adds padding for better spacing */
+    max-width: 400px; /* Limits the width of the form */
+    margin: 0 auto; /* Centers the form horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow for a card-like appearance */
+    border-radius: 8px; /* Optional: Rounds the corners */
 }

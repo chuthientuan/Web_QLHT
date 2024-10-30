@@ -47,27 +47,32 @@ namespace BTL.Controllers
         // GET: SanPhams/Create
         public IActionResult Create()
         {
-            ViewData["MaLt"] = new SelectList(_context.LoaiThuocs, "MaLt", "MaLt");
+            var loaiThuoc = new List<SelectListItem>();
+            foreach(var item in _context.LoaiThuocs)
+            {
+                loaiThuoc.Add(new SelectListItem
+                {
+                    Text = item.TenLt,
+                    Value = item.MaLt.ToString()
+                });
+            }
+            ViewBag.MaLt = loaiThuoc;
             return View();
         }
-
-        // POST: SanPhams/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaSp,MaLt,TenSp,DonGiaNhap,MoTa,DonGiaBan,SoLuong,Anh,Hsd")] SanPham sanPham)
+        public IActionResult Create([Bind("MaSp,MaLt,TenSp,DonGiaNhap,MoTa,DonGiaBan,SoLuong,Anh,Hsd")] SanPham sanPham)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(sanPham);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaLt"] = new SelectList(_context.LoaiThuocs, "MaLt", "MaLt", sanPham.MaLt);
+            ViewBag.MaLt = new SelectList(_context.LoaiThuocs, "MaLt", "TenLt", sanPham.MaLt);
             return View(sanPham);
         }
-
+        
         // GET: SanPhams/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -81,7 +86,7 @@ namespace BTL.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaLt"] = new SelectList(_context.LoaiThuocs, "MaLt", "MaLt", sanPham.MaLt);
+            ViewBag.MaLtNavigation = new SelectList(_context.LoaiThuocs, "MaLt", "TenLt", sanPham.MaLt);
             return View(sanPham);
         }
 
@@ -90,7 +95,7 @@ namespace BTL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaSp,MaLt,TenSp,DonGiaNhap,MoTa,DonGiaBan,SoLuong,Anh,Hsd")] SanPham sanPham)
+        public async Task<IActionResult> Edit(int id, [Bind("MaSp,TenLt,MaLt,TenSp,DonGiaNhap,MoTa,DonGiaBan,SoLuong,Anh,Hsd")] SanPham sanPham)
         {
             if (id != sanPham.MaSp)
             {
@@ -117,7 +122,7 @@ namespace BTL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaLt"] = new SelectList(_context.LoaiThuocs, "MaLt", "MaLt", sanPham.MaLt);
+            ViewData["MaLt"] = new SelectList(_context.LoaiThuocs, "MaLt", "TenLt", sanPham.MaLt);
             return View(sanPham);
         }
 

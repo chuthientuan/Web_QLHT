@@ -55,6 +55,12 @@ namespace BTL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaTk,HoTen,Role,TenDangNhap,MatKhau,Email,DienThoai")] TaiKhoan taiKhoan)
         {
+            bool usernameExists = await _context.TaiKhoans.AnyAsync(t => t.TenDangNhap == taiKhoan.TenDangNhap);
+            if (usernameExists)
+            {
+                ModelState.AddModelError("TenDangNhap", "Tên đăng nhập đã tồn tại. Vui lòng chọn tên đăng nhập khác.");
+                return View(taiKhoan);
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(taiKhoan);
