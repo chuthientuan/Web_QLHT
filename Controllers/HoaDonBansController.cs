@@ -21,7 +21,7 @@ namespace BTL.Controllers
         // GET: HoaDonBans
         public async Task<IActionResult> Index()
         {
-            var qlhieuThuocContext = _context.HoaDonBans.Include(h => h.MaTkNavigation);
+            var qlhieuThuocContext = _context.HoaDonBans.Include(h => h.MaTkNavigation).Include(c => c.ChiTietHdbs);
             return View(await qlhieuThuocContext.ToListAsync());
         }
 

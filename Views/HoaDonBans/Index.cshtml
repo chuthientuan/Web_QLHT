@@ -5,22 +5,23 @@
     Layout = "~/Views/Shared/MyLayout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Hóa Đơn Bán</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<a asp-action="Create" class="btn btn-primary">Tạo hóa đơn mới</a>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MaTk)
+                Tên Thuốc
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayBan)
+                Tên Khách Hàng
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TrangThai)
+                Ngày Bán
+            </th>
+            <th>
+                Trạng Thái
             </th>
             <th></th>
         </tr>
@@ -29,18 +30,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MaTkNavigation.MaTk)
+                @Html.DisplayFor(modelItem => item.MaHdb)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NgayBan)
+                @Html.DisplayFor(modelItem => item.MaTkNavigation.HoTen)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayBan)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TrangThai)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MaHdb">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaHdb">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaHdb">Delete</a>
+                <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.MaHdb">Xem</a>
             </td>
         </tr>
 }
