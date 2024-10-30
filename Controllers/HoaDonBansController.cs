@@ -21,7 +21,10 @@ namespace BTL.Controllers
         // GET: HoaDonBans
         public async Task<IActionResult> Index()
         {
-            var qlhieuThuocContext = _context.HoaDonBans.Include(h => h.MaTkNavigation);
+            var qlhieuThuocContext = _context.HoaDonBans
+                .Include(h => h.MaTkNavigation)
+                .Include(h => h.ChiTietHdbs)
+                .ThenInclude(ct => ct.MaSpNavigation); 
             return View(await qlhieuThuocContext.ToListAsync());
         }
 
@@ -35,6 +38,8 @@ namespace BTL.Controllers
 
             var hoaDonBan = await _context.HoaDonBans
                 .Include(h => h.MaTkNavigation)
+                .Include(h => h.ChiTietHdbs)
+                .ThenInclude(ct => ct.MaSpNavigation)
                 .FirstOrDefaultAsync(m => m.MaHdb == id);
             if (hoaDonBan == null)
             {
@@ -131,6 +136,8 @@ namespace BTL.Controllers
 
             var hoaDonBan = await _context.HoaDonBans
                 .Include(h => h.MaTkNavigation)
+                .Include(h => h.ChiTietHdbs)
+                .ThenInclude(ct => ct.MaSpNavigation)
                 .FirstOrDefaultAsync(m => m.MaHdb == id);
             if (hoaDonBan == null)
             {

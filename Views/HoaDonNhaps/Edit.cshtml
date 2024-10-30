@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/MyLayout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Sửa Hóa Đơn Nhập</h1>
 
-<h4>HoaDonNhap</h4>
+<h4>Hóa Đơn Nhập</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,24 +15,21 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="MaHdn" />
             <div class="form-group">
-                <label asp-for="MaNcc" class="control-label"></label>
+                <label asp-for="MaNcc" class="control-label">Tên nhà cung cấp</label>
                 <select asp-for="MaNcc" class="form-control" asp-items="ViewBag.MaNcc"></select>
                 <span asp-validation-for="MaNcc" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NgayNhap" class="control-label"></label>
+                <label asp-for="NgayNhap" class="control-label">Ngày nhập</label>
                 <input asp-for="NgayNhap" class="form-control" />
                 <span asp-validation-for="NgayNhap" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Lưu" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-action="Index">Quay lại</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
