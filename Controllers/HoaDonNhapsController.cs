@@ -21,8 +21,8 @@ namespace BTL.Controllers
         // GET: HoaDonNhaps
         public async Task<IActionResult> Index()
         {
-            var qlhieuThuocContext = _context.HoaDonNhaps.Include(h => h.MaNccNavigation).Include(c => c.ChiTietHdns)
-                                    .ThenInclude(ct => ct.MaSpNavigation);
+            var qlhieuThuocContext = _context.HoaDonNhaps
+                .Include(h => h.MaNccNavigation);
             return View(await qlhieuThuocContext.ToListAsync());
         }
 
@@ -35,8 +35,9 @@ namespace BTL.Controllers
             }
 
             var hoaDonNhap = await _context.HoaDonNhaps
-                .Include(h => h.MaNccNavigation)
-                .FirstOrDefaultAsync(m => m.MaHdn == id);
+            .Include(h => h.MaNccNavigation)
+            .FirstOrDefaultAsync(m => m.MaHdn == id);
+
             if (hoaDonNhap == null)
             {
                 return NotFound();
@@ -48,9 +49,16 @@ namespace BTL.Controllers
         // GET: HoaDonNhaps/Create
         public IActionResult Create()
         {
-            ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "TenNcc");
-            return View();
+            var hoaDonNhap = new HoaDonNhap
+            {
+            };
+
+            ViewBag.MaNcc = new SelectList(_context.NhaCungCaps, "MaNcc", "TenNcc");
+            return View(hoaDonNhap);
         }
+
+
+
 
         // POST: HoaDonNhaps/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -63,9 +71,9 @@ namespace BTL.Controllers
             {
                 _context.Add(hoaDonNhap);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "ChiTietHdns");
             }
-            ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "MaNcc", hoaDonNhap.MaNcc);
+            ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "TenNcc");
             return View(hoaDonNhap);
         }
 
@@ -77,21 +85,28 @@ namespace BTL.Controllers
                 return NotFound();
             }
 
-            var hoaDonNhap = await _context.HoaDonNhaps.FindAsync(id);
+            var hoaDonNhap = await _context.HoaDonNhaps
+                .Include(h => h.MaNccNavigation) // Optional, if you need to display customer details
+                .FirstOrDefaultAsync(m => m.MaHdn == id);
+
             if (hoaDonNhap == null)
             {
                 return NotFound();
             }
-            ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "TenNcc", hoaDonNhap.MaNcc);
+
+            // Populate ViewBag for SelectLists
+            ViewBag.MaNcc = new SelectList(_context.NhaCungCaps, "MaNcc", "TenNcc", hoaDonNhap.MaNcc);
             return View(hoaDonNhap);
         }
 
-        // POST: HoaDonNhaps/Edit/5
+
+
+        // POST: HoaDonBans/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaHdn,NgayNhap,MaNcc")] HoaDonNhap hoaDonNhap)
+        public async Task<IActionResult> Edit(int id, [Bind("MaHdn,MaNcc,NgayNhap")] HoaDonNhap hoaDonNhap)
         {
             if (id != hoaDonNhap.MaHdn)
             {
@@ -118,7 +133,7 @@ namespace BTL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "MaNcc", hoaDonNhap.MaNcc);
+            ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "TenNcc", hoaDonNhap.MaNcc);
             return View(hoaDonNhap);
         }
 
@@ -132,6 +147,7 @@ namespace BTL.Controllers
 
             var hoaDonNhap = await _context.HoaDonNhaps
                 .Include(h => h.MaNccNavigation)
+                .Include(h => h.ChiTietHdns)
                 .FirstOrDefaultAsync(m => m.MaHdn == id);
             if (hoaDonNhap == null)
             {

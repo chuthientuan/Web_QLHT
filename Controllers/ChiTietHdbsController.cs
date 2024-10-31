@@ -138,8 +138,6 @@ namespace BTL.Controllers
         }
 
 
-
-
         // GET: ChiTietHdbs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

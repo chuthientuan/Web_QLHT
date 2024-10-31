@@ -9,7 +9,7 @@
 <h1>Chi Tiết Hóa Đơn Nhập</h1>
 
 <p>
-    <a asp-action="Create" asp-route-maHdb="@ViewBag.MaHdn" class="btn btn-primary">Tạo mới</a>
+    <a asp-action="Create" asp-route-maHdn="@ViewBag.MaHdn" class="btn btn-primary">Tạo mới</a>
 </p>
 <table class="table">
     <thead>
@@ -27,10 +27,12 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) {
-            decimal itemTotal = (item.MaSpNavigation.DonGiaNhap * (item.Slnhap ?? 0));
-            totalAmount += itemTotal;
-            <tr>   
+        @foreach (var item in Model)
+        {
+            decimal itemTotal = (item.MaSpNavigation.DonGiaNhap * (item.Slnhap ?? 0)); // Calculate total for this item
+            totalAmount += itemTotal; // Accumulate total amount
+
+            <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.MaSpNavigation.TenSp)
                 </td>
@@ -41,12 +43,12 @@
                     @itemTotal.ToString("C0")
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MaHdn }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.MaHdn }) |
+                    @Html.ActionLink("Edit", "Edit", new { maHdn = item.MaHdn, maSp = item.MaSp })
                     @Html.ActionLink("Delete", "Delete", new { id = item.MaHdn })
                 </td>
             </tr>
         }
+
         <tr>
             <td><strong>Thành tiền</strong></td>
             <td></td>
