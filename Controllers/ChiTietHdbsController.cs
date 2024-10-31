@@ -19,11 +19,17 @@ namespace BTL.Controllers
         }
 
         // GET: ChiTietHdbs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int maHdb)
         {
-            var qlhieuThuocContext = _context.ChiTietHdbs.Include(c => c.MaHdbNavigation).Include(c => c.MaSpNavigation);
-            return View(await qlhieuThuocContext.ToListAsync());
+            ViewBag.CurrentMaHdb = maHdb; // Giữ lại giá trị MaHdb để sử dụng trong view
+            var chiTietHdbList = await _context.ChiTietHdbs
+                .Include(c => c.MaHdbNavigation)
+                .Include(c => c.MaSpNavigation)
+                .Where(c => c.MaHdb == maHdb) // Lọc theo MaHdb
+                .ToListAsync();
+            return View(chiTietHdbList);
         }
+
 
         // GET: ChiTietHdbs/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -46,12 +52,13 @@ namespace BTL.Controllers
         }
 
         // GET: ChiTietHdbs/Create
-        public IActionResult Create()
+        public IActionResult Create(int maHdb)
         {
-            ViewData["MaHdb"] = new SelectList(_context.HoaDonBans, "MaHdb", "MaHdb");
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp");
-            return View();
+            ViewData["MaSp"] = new SelectList(_context.SanPhams, "TenSp", "MaSp");
+            var chiTietHdb = new ChiTietHdb { MaHdb = maHdb };
+            return View(chiTietHdb);
         }
+
 
         // POST: ChiTietHdbs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -64,12 +71,12 @@ namespace BTL.Controllers
             {
                 _context.Add(chiTietHdb);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { maHdb = chiTietHdb.MaHdb }); // Redirect với MaHDB
             }
-            ViewData["MaHdb"] = new SelectList(_context.HoaDonBans, "MaHdb", "MaHdb", chiTietHdb.MaHdb);
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp", chiTietHdb.MaSp);
+            ViewData["MaSp"] = new SelectList(_context.SanPhams, "TenSp", "MaSp", chiTietHdb.MaSp);
             return View(chiTietHdb);
         }
+
 
         // GET: ChiTietHdbs/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -84,8 +91,7 @@ namespace BTL.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaHdb"] = new SelectList(_context.HoaDonBans, "MaHdb", "MaHdb", chiTietHdb.MaHdb);
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp", chiTietHdb.MaSp);
+            ViewData["MaSp"] = new SelectList(_context.SanPhams, "TenSp", "MaSp", chiTietHdb.MaSp);
             return View(chiTietHdb);
         }
 
@@ -121,8 +127,7 @@ namespace BTL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaHdb"] = new SelectList(_context.HoaDonBans, "MaHdb", "MaHdb", chiTietHdb.MaHdb);
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp", chiTietHdb.MaSp);
+            ViewData["MaSp"] = new SelectList(_context.SanPhams, "TenSp", "MaSp", chiTietHdb.MaSp);
             return View(chiTietHdb);
         }
 

@@ -13,7 +13,7 @@ public partial class ChiTietHdb
 
     public int? Slban { get; set; }
 
-    public virtual HoaDonBan MaHdbNavigation { get; set; } = null!;
+    public virtual HoaDonBan? MaHdbNavigation { get; set; } = null!;
 
-    public virtual SanPham MaSpNavigation { get; set; } = null!;
+    public virtual SanPham? MaSpNavigation { get; set; } = null!;
 }

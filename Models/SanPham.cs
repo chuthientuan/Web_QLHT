@@ -17,7 +17,7 @@ public partial class SanPham
 
     public string? MoTa { get; set; }
 
-    public decimal? DonGiaBan { get; set; }
+    public decimal DonGiaBan { get; set; }
 
     public int? SoLuong { get; set; }
 
@@ -25,9 +25,9 @@ public partial class SanPham
 
     public DateTime? Hsd { get; set; }
 
-    public virtual ICollection<ChiTietHdb> ChiTietHdbs { get; set; } = new List<ChiTietHdb>();
+    public virtual ICollection<ChiTietHdb>? ChiTietHdbs { get; set; } = new List<ChiTietHdb>();
 
-    public virtual ICollection<ChiTietHdn> ChiTietHdns { get; set; } = new List<ChiTietHdn>();
+    public virtual ICollection<ChiTietHdn>? ChiTietHdns { get; set; } = new List<ChiTietHdn>();
 
-    public virtual LoaiThuoc MaLtNavigation { get; set; } = null!;
+    public virtual LoaiThuoc? MaLtNavigation { get; set; } = null!;
 }
