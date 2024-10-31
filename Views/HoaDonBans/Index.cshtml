@@ -12,10 +12,10 @@
     <thead>
         <tr>
             <th>
-                Tên Thuốc
+                Tên Khách Hàng
             </th>
             <th>
-                Tên Khách Hàng
+                Tên Thuốc
             </th>
             <th>
                 Ngày Bán
@@ -30,17 +30,17 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.MaTkNavigation.HoTen)
+            </td>
+            <td>
                 @if (item.ChiTietHdbs.Any())
                 {
                     @Html.DisplayFor(modelItem => item.ChiTietHdbs.First().MaSpNavigation.TenSp)
                 }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaTkNavigation.HoTen)
+                @Html.DisplayFor(modelItem => item.NgayBan)
             </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NgayBan)
-                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TrangThai)
             </td>

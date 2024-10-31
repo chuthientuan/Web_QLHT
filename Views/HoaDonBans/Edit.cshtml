@@ -15,18 +15,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="MaHdb" />
             <div class="form-group">
-                <label asp-for="MaTk" class="control-label">Mã tài khoản</label>
-                <select asp-for="MaTk" class="form-control" asp-items="ViewBag.MaTk"></select>
-                <span asp-validation-for="MaTk" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="MaTkNavigation.HoTen" class="control-label">Tên khách hàng</label>
-                <input asp-for="NgayBan" class="form-control" />
+                <input asp-for="MaTkNavigation.HoTen" class="form-control" readonly/>
                 <span asp-validation-for="MaTkNavigation.HoTen" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label class="control-label">Tên sản phẩm</label>
+                <input type="text" class="form-control"
+                       value="@Model.ChiTietHdbs.FirstOrDefault()?.MaSpNavigation?.TenSp"
+                       readonly />
+            </div>
+            <div class="form-group">
                 <label asp-for="NgayBan" class="control-label">Ngày bán</label>
-                <input asp-for="NgayBan" class="form-control" />
+                <input asp-for="NgayBan" class="form-control" readonly />
                 <span asp-validation-for="NgayBan" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -40,10 +41,6 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
