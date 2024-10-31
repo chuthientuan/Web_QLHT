@@ -19,10 +19,15 @@ namespace BTL.Controllers
         }
 
         // GET: ChiTietHdns
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int maHdn)
         {
-            var qlhieuThuocContext = _context.ChiTietHdns.Include(c => c.MaHdnNavigation).Include(c => c.MaSpNavigation);
-            return View(await qlhieuThuocContext.ToListAsync());
+            ViewBag.CurrentMaHdn = maHdn; 
+            var chiTietHdnList = await _context.ChiTietHdns
+                .Include(c => c.MaHdnNavigation)
+                .Include(c => c.MaSpNavigation)
+                .Where(c => c.MaHdn == maHdn) 
+                .ToListAsync();
+            return View(chiTietHdnList);
         }
 
         // GET: ChiTietHdns/Details/5
@@ -46,11 +51,11 @@ namespace BTL.Controllers
         }
 
         // GET: ChiTietHdns/Create
-        public IActionResult Create()
+        public IActionResult Create(int maHdn)
         {
-            ViewData["MaHdn"] = new SelectList(_context.HoaDonNhaps, "MaHdn", "MaHdn");
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp");
-            return View();
+            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "TenSp");
+            var chiTietHdn = new ChiTietHdn { MaHdn = maHdn };
+            return View(chiTietHdn);
         }
 
         // POST: ChiTietHdns/Create
@@ -64,10 +69,9 @@ namespace BTL.Controllers
             {
                 _context.Add(chiTietHdn);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { maHdn = chiTietHdn.MaHdn });
             }
-            ViewData["MaHdn"] = new SelectList(_context.HoaDonNhaps, "MaHdn", "MaHdn", chiTietHdn.MaHdn);
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp", chiTietHdn.MaSp);
+            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "TenSp", chiTietHdn.MaSp);
             return View(chiTietHdn);
         }
 

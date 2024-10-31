@@ -54,7 +54,7 @@ namespace BTL.Controllers
         // GET: ChiTietHdbs/Create
         public IActionResult Create(int maHdb)
         {
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "TenSp", "MaSp");
+            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "TenSp");
             var chiTietHdb = new ChiTietHdb { MaHdb = maHdb };
             return View(chiTietHdb);
         }
@@ -73,7 +73,7 @@ namespace BTL.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { maHdb = chiTietHdb.MaHdb }); // Redirect với MaHDB
             }
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "TenSp", "MaSp", chiTietHdb.MaSp);
+            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "TenSp", chiTietHdb.MaSp);
             return View(chiTietHdb);
         }
 

@@ -13,7 +13,7 @@ public partial class SanPham
 
     public string? TenSp { get; set; }
 
-    public decimal? DonGiaNhap { get; set; }
+    public decimal DonGiaNhap { get; set; }
 
     public string? MoTa { get; set; }
 
