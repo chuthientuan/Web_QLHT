@@ -12,7 +12,7 @@ public partial class HoaDonBan
     public DateTime? NgayBan { get; set; }
     public string TrangThai { get; set; } = null!;
 
-    public int? MaTk { get; set; }
+    public int MaTk { get; set; }
 
     public virtual ICollection<ChiTietHdb> ChiTietHdbs { get; set; } = new List<ChiTietHdb>();
 

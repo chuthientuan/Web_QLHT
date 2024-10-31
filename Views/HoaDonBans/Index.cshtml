@@ -15,9 +15,6 @@
                 Tên Khách Hàng
             </th>
             <th>
-                Tên Thuốc
-            </th>
-            <th>
                 Ngày Bán
             </th>
             <th>
@@ -32,15 +29,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.MaTkNavigation.HoTen)
             </td>
-            <td>
-                @if (item.ChiTietHdbs.Any())
-                {
-                    @Html.DisplayFor(modelItem => item.ChiTietHdbs.First().MaSpNavigation.TenSp)
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayBan)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayBan)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TrangThai)
             </td>

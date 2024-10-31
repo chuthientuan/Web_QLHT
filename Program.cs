@@ -1,4 +1,4 @@
-using BTL.Models; // Đảm bảo namespace đúng
+using BTL.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BTL

@@ -14,26 +14,22 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="MaTkNavigation.HoTen" class="control-label">Tên khách hàng</label>
-                <input asp-for="MaTkNavigation.HoTen" class="form-control" />
-                <span asp-validation-for="MaTkNavigation.HoTen" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ChiTietHdbs.FirstOrDefault().MaSp" class="control-label">Tên Thuốc</label>
-                <select name="maSp" class="form-control" asp-items="ViewBag.SanPhamList"></select>
+                <label asp-for="MaTk" class="control-label">Tên khách</label>
+                <select asp-for="MaTk" class="form-control" asp-items="ViewBag.MaTk"></select>
             </div>
             <div class="form-group">
                 <label asp-for="NgayBan" class="control-label"></label>
-                <input asp-for="NgayBan" class="form-control" />
+                <input asp-for="NgayBan" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" />
                 <span asp-validation-for="NgayBan" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="TrangThai" class="control-label"></label>
-                <input asp-for="TrangThai" class="form-control" />
+                <label asp-for="TrangThai" class="control-label">Trạng Thái</label>
+                <select asp-for="TrangThai" class="form-control" asp-items="ViewBag.TrangThaiList"></select>
                 <span asp-validation-for="TrangThai" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input value="Tạo" type="submit" class="btn btn-primary" />
+                <input type="submit" value="Tạo" class="btn btn-primary" />
                 <a class="btn btn-secondary" asp-action="Index">Quay lại</a>
             </div>
         </form>
