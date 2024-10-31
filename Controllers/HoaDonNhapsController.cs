@@ -49,7 +49,6 @@ namespace BTL.Controllers
         public IActionResult Create()
         {
             ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "TenNcc");
-            ViewData["SanPhamList"] = new SelectList(_context.SanPhams, "MaSp", "TenSp");
             return View();
         }
 
@@ -83,7 +82,7 @@ namespace BTL.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "MaNcc", hoaDonNhap.MaNcc);
+            ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "TenNcc", hoaDonNhap.MaNcc);
             return View(hoaDonNhap);
         }
 

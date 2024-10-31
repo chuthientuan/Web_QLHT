@@ -14,9 +14,6 @@
     <thead>
         <tr>
             <th>
-                Tên Thuốc
-            </th>
-            <th>
                 Nhà Cung Cấp
             </th>
             <th>
@@ -28,12 +25,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @if(item.ChiTietHdns.Any())
-                {
-                    @Html.DisplayFor(modelItem => item.ChiTietHdns.First().MaSpNavigation.TenSp)
-                }
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MaNccNavigation.TenNcc)
             </td>
