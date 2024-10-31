@@ -7,23 +7,17 @@
 
 <h1>Hóa Đơn Nhập</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Tạo mới</a>
-</p>
+<a asp-action="Create" class="btn btn-primary">Tạo mới</a>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                Nhà Cung Cấp
-            </th>
-            <th>
-                Ngày Nhập
-            </th>
+            <th>Nhà Cung Cấp</th>
+            <th>Ngày Nhập</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.MaNccNavigation.TenNcc)
@@ -35,6 +29,6 @@
                 <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.MaHdn">Xem</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
