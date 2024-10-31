@@ -8,7 +8,6 @@ public partial class ChiTietHdn
 {
     [Key]
     public int MaHdn { get; set; }
-
     public int MaSp { get; set; }
 
     public int? Slnhap { get; set; }

@@ -15,7 +15,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Tên thuốc</th>
+            <th>Tên sản phẩm</th>
             <th>Số lượng</th>
             <th>Tổng tiền</th>
             <th>Thao tác</th>
@@ -27,21 +27,21 @@
             decimal itemTotal = (item.MaSpNavigation.DonGiaBan * (item.Slban ?? 0)); // Calculate total for this item
             totalAmount += itemTotal; // Accumulate total amount
 
-            <tr>
-                <td>
+                <tr>
+                    <td>
                     @Html.DisplayFor(modelItem => item.MaSpNavigation.TenSp)
-                </td>
-                <td>
+                    </td>
+                    <td>
                     @Html.DisplayFor(modelItem => item.Slban)
-                </td>
-                <td>
+                    </td>
+                    <td>
                     @itemTotal.ToString("C0")
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MaHdb }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.MaHdb })
-                </td>
-            </tr>
+                    </td>
+                    <td>
+                    @Html.ActionLink("Edit", "Edit", new { maHdb = item.MaHdb, maSp = item.MaSp })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaHdb})
+                    </td>
+                </tr>
         }
 
         <tr>

@@ -13,22 +13,16 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Slban)
+            Tên sản phẩm
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaSp)
+        </dd>
+        <dt class = "col-sm-2">
+            Số lượng
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Slban)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaHdbNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaHdbNavigation.MaHdb)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaSpNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaSpNavigation.MaSp)
         </dd>
     </dl>
     
