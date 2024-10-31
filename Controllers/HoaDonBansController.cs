@@ -86,8 +86,6 @@ namespace BTL.Controllers
         }
 
         // GET: HoaDonBans/Edit/5
-        // GET: HoaDonBans/Edit/5
-        // GET: HoaDonBans/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -150,7 +148,7 @@ namespace BTL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaTk"] = new SelectList(_context.TaiKhoans, "MaTk", "MaTk", hoaDonBan.MaTk);
+            ViewData["MaTk"] = new SelectList(_context.TaiKhoans, "MaTk", "Hoten", hoaDonBan.MaTk);
             return View(hoaDonBan);
         }
 

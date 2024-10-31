@@ -71,7 +71,7 @@ namespace BTL.Controllers
             {
                 _context.Add(chiTietHdb);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), new { maHdb = chiTietHdb.MaHdb }); // Redirect với MaHDB
+                return RedirectToAction(nameof(Index), new { maHdb = chiTietHdb.MaHdb });
             }
             ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "TenSp", chiTietHdb.MaSp);
             return View(chiTietHdb);
