@@ -59,32 +59,25 @@
     <section class="my-5">
         <h2 class="text-center mb-4">Danh mục sản phẩm</h2>
         <div class="row text-center">
-            <div class="col-3">
-                <a href="#">
+            <div class="col-4">
+                <a href="#dp">
                     <img src="~/images/Trang_chu/Danh_muc/ct-1.webp" class="rounded-circle mb-2" alt="Dược phẩm"
                          style="width: 100px;">
                     <h5>Dược phẩm</h5>
                 </a>
             </div>
-            <div class="col-3">
-                <a href="#">
+            <div class="col-4">
+                <a href="#cssk">
                     <img src="~/images/Trang_chu/Danh_muc/ct-2.webp" class="rounded-circle mb-2" alt="Chăm sóc sức khỏe"
                          style="width: 100px;">
                     <h5>Chăm sóc sức khỏe</h5>
                 </a>
             </div>
-            <div class="col-3">
-                <a href="#">
+            <div class="col-4">
+                <a href="#tpcn">
                     <img src="~/images/Trang_chu/Danh_muc/ct-3.webp" class="rounded-circle mb-2"
                          alt="Thực phẩm chức năng" style="width: 100px;">
                     <h5>Thực phẩm chức năng</h5>
-                </a>
-            </div>
-            <div class="col-3">
-                <a href="#">
-                    <img src="~/images/Trang_chu/Danh_muc/ct-4.webp" class="rounded-circle mb-2" alt="Thiết bị y tế"
-                         style="width: 100px;">
-                    <h5>Thiết bị y tế</h5>
                 </a>
             </div>
         </div>
@@ -93,193 +86,102 @@
     <div style="background-color: #f0f0f0; height: 20px;"></div>
 
     <!-- Featured Products Section -->
-    <section class="my-5">
-        <h2 class="text-center mb-4">Thương hiệu Pharmacity - Chăm sóc toàn diện</h2>
-        <div id="product-carousel" class="carousel slide" data-bs-ride="carousel">
+    <section id="dp" class="my-5">
+        <h2 class="text-center mb-4">Dược Phẩm</h2>
+        <div id="duocPharmCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="row">
-                        <!-- Danh sách sản phẩm đầu tiên -->
-                        @foreach(var item in Model)
+                        @foreach (var item in Model.Where(p => p.MaLt == 1))
                         {
-                            <div class="col-md-2 product" style="display: inline-block;">
+                            <div class="col-md-2 product">
                                 <div class="card small-card">
-                                    <img src="~/images/duocpham/Acetylcystein 200 Imexpharm (10 vỉ x 10 viên).webp"
-                                         class="card-img-top" alt="Sản phẩm 1">
+                                    <img src="~/@item.Anh" class="card-img-top" alt="@item.TenSp">
                                     <div class="card-body text-center">
                                         <h5 class="card-title title-limit">@item.TenSp</h5>
-                                        <p class="card-text">@item.DonGiaBan.ToString("C") $</p>
+                                        <p class="card-text">@item.DonGiaBan.ToString("C")</p>
                                         <a href="@Url.Action("AddToCart", "Cart", new { productId = item.MaSp })" class="btn btn-success">Thêm vào giỏ</a>
                                     </div>
                                 </div>
                             </div>
                         }
-                        <div class="col-md-2 product" style="display: inline-block;">
-                            <div class="card small-card">
-                                <img src="~/images/duocpham/Acetylcystein 200 Imexpharm (10 vỉ x 10 viên).webp"
-                                     class="card-img-top" alt="Sản phẩm 1">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title title-limit">Acetylcystein 200 Imexpharm (10 vỉ x 10 viên).</h5>
-                                    <p class="card-text">147 $</p>
-                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 product" style="display: inline-block;">
-                            <div class="card small-card">
-                                <img src="~/images/duocpham/Acetylcystein 200mg Vidipha (Hộp 20 vỉ x 10 viên).jpg"
-                                     class="card-img-top" alt="Sản phẩm 2">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title title-limit">Acetylcystein 200mg Vidipha (Hộp 20 vỉ x 10 viên).</h5>
-                                    <p class="card-text">100 $</p>
-                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 product" style="display: inline-block;">
-                            <div class="card small-card">
-                                <img src="~/images/duocpham/Katrypsin 8400Iu (Hộp 10 vỉ x10 viên).jpg"
-                                     class="card-img-top" alt="Sản phẩm 3">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title title-limit">Katrypsin 8400Iu (Hộp 10 vỉ x10 viên)</h5>
-                                    <p class="card-text">116 $</p>
-                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 product" style="display: inline-block;">
-                            <div class="card small-card">
-                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
-                                     class="card-img-top" alt="Sản phẩm 4">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title title-limit">
-                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
-                                        Abbott Glucerna (850g)
-                                    </h5>
-                                    <p class="card-text">879 $</p>
-                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 product" style="display: inline-block;">
-                            <div class="card small-card">
-                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
-                                     class="card-img-top" alt="Sản phẩm 5">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title title-limit">
-                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
-                                        Abbott Glucerna (850g)
-                                    </h5>
-                                    <p class="card-text">879 $</p>
-                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 product" style="display: inline-block;">
-                            <div class="card small-card">
-                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
-                                     class="card-img-top" alt="Sản phẩm 6">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title title-limit">
-                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
-                                        Abbott Glucerna (850g)
-                                    </h5>
-                                    <p class="card-text">879 $</p>
-                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="row">
-                        <!-- Danh sách sản phẩm thứ hai -->
-                        <div class="col-md-2 product" style="display: inline-block;">
-                            <div class="card small-card">
-                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
-                                     class="card-img-top" alt="Sản phẩm 7">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title title-limit">
-                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
-                                        Abbott Glucerna (850g)
-                                    </h5>
-                                    <p class="card-text">879 $</p>
-                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 product" style="display: inline-block;">
-                            <div class="card small-card">
-                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
-                                     class="card-img-top" alt="Sản phẩm 8">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title title-limit">
-                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
-                                        Abbott Glucerna (850g)
-                                    </h5>
-                                    <p class="card-text">879 $</p>
-                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 product" style="display: inline-block;">
-                            <div class="card small-card">
-                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
-                                     class="card-img-top" alt="Sản phẩm 9">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title title-limit">
-                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
-                                        Abbott Glucerna (850g)
-                                    </h5>
-                                    <p class="card-text">879 $</p>
-                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 product" style="display: inline-block;">
-                            <div class="card small-card">
-                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
-                                     class="card-img-top" alt="Sản phẩm 10">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title title-limit">
-                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
-                                        Abbott Glucerna (850g)
-                                    </h5>
-                                    <p class="card-text">879 $</p>
-                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 product" style="display: inline-block;">
-                            <div class="card small-card">
-                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
-                                     class="card-img-top" alt="Sản phẩm 11">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title title-limit">
-                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
-                                        Abbott Glucerna (850g)
-                                    </h5>
-                                    <p class="card-text">879 $</p>
-                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Thêm các carousel-item khác nếu cần -->
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#product-carousel" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#duocPharmCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#product-carousel" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#duocPharmCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
     </section>
-
-
+    <section id="cssk" class="my-5">
+        <h2 class="text-center mb-4">Chăm Sóc Sức Khỏe</h2>
+        <div id="chamSocCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        @foreach (var item in Model.Where(p => p.MaLt == 2))
+                        {
+                            <div class="col-md-2 product">
+                                <div class="card small-card">
+                                    <img src="~/@item.Anh" class="card-img-top" alt="@item.TenSp">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title title-limit">@item.TenSp</h5>
+                                        <p class="card-text">@item.DonGiaBan.ToString("C")</p>
+                                        <a href="@Url.Action("AddToCart", "Cart", new { productId = item.MaSp })" class="btn btn-success">Thêm vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#chamSocCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#chamSocCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+    <section id="tpcn" class="my-5">
+        <h2 class="text-center mb-4">Thực Phẩm Chức Năng</h2>
+        <div id="chamSocCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        @foreach (var item in Model.Where(p => p.MaLt == 3))
+                        {
+                            <div class="col-md-2 product">
+                                <div class="card small-card">
+                                    <img src="~/@item.Anh" class="card-img-top" alt="@item.TenSp">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title title-limit">@item.TenSp</h5>
+                                        <p class="card-text">@item.DonGiaBan.ToString("C")</p>
+                                        <a href="@Url.Action("AddToCart", "Cart", new { productId = item.MaSp })" class="btn btn-success">Thêm vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#chamSocCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#chamSocCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
 </div>
 
 <div style="background-color: #f0f0f0; height: 20px;"></div>

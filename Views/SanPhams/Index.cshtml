@@ -5,15 +5,15 @@
     Layout = "~/Views/Shared/MyLayout.cshtml";
 }
 
-<h1>Danh Sách Thuốc</h1>
+<h1>Danh Sách Sản Phẩm</h1>
 
-<a asp-action="Create" class="btn btn-primary">Thêm thuốc mới</a>
+<a asp-action="Create" class="btn btn-primary">Thêm sản phẩm mới</a>
 @await Component.InvokeAsync("LoaiThuoc")
 <table class="table">
     <thead>
         <tr>
             <th>
-                Tên Thuốc
+                Tên Sản Phẩm
             </th>
             <th>
                 Loại Thuốc
@@ -52,19 +52,19 @@
                         @Html.DisplayFor(modelItem => item.MaLtNavigation.TenLt)
                 </td>
                 <td>
-                        @Html.DisplayFor(modelItem => item.DonGiaNhap)
+                        @Html.DisplayFor(modelItem => item.DonGiaNhap) $
                 </td>
                 <td>
                         @Html.DisplayFor(modelItem => item.MoTa)
                 </td>
                 <td>
-                        @Html.DisplayFor(modelItem => item.DonGiaBan)
+                        @Html.DisplayFor(modelItem => item.DonGiaBan) $
                 </td>
                 <td>
                         @Html.DisplayFor(modelItem => item.SoLuong)
                 </td>
                 <td>
-                    <img src="~/@item.Anh" alt="Selected Image" class="img-thumbnail" />
+                    <img src="@Url.Content("~/" + item.Anh)" alt="Selected Image" class="img-thumbnail" style=""/>
                 </td>
                 <td>
                         @Html.DisplayFor(modelItem => item.Hsd)

@@ -6020,6 +6020,16 @@ textarea.form-control-lg {
     line-height: var(--bs-modal-title-line-height);
 }
 
+.title-limit {
+    max-height: 3em; /* Giới hạn chiều cao tối đa */
+    overflow: hidden; /* Ẩn nội dung thừa */
+    text-overflow: ellipsis; /* Hiển thị dấu ... */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Giới hạn số dòng hiển thị */
+    margin: 0; /* Xóa margin mặc định */
+}
+
 .modal-body {
     position: relative;
     flex: 1 1 auto;
@@ -6579,21 +6589,9 @@ textarea.form-control-lg {
 
 .carousel-control-prev,
 .carousel-control-next {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 15%;
-    padding: 0;
-    color: #fff;
-    text-align: center;
-    background: none;
-    border: 0;
-    opacity: 0.5;
-    transition: opacity 0.15s ease;
+    width: 5%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -6622,12 +6620,8 @@ textarea.form-control-lg {
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    display: inline-block;
-    width: 2rem;
-    height: 2rem;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    background-size: 100% 100%;
+    background-color: black;
+    border-radius: 50%;
 }
 
 /* rtl:options: {
