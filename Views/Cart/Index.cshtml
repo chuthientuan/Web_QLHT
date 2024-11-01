@@ -26,12 +26,16 @@
                         {
                             <tr>
                                 <td>@item.ProductName</td>
-                                <td><img src="~/images/duocpham/@item.ImageUrl" style="width: 50px;" /></td>
-                                <td>@item.Price.ToString("C") $</td>
-                                <td>@item.Quantity</td>
-                                <td>@(item.Price * item.Quantity).ToString("C")</td>
                                 <td>
-                                    <a href="@Url.Action("Remove", "Cart", new { id = item.ProductId })" class="btn btn-danger">Xóa</a>
+                                    <img src="~/images/duocpham/@item.ImageUrl" alt="@item.ProductName" style="width: 50px;" />
+                                </td>
+                                <td>@item.Price.ToString("C")</td>
+                                <td>@item.Quantity</td>
+                                <td>@((item.Price * item.Quantity).ToString("C"))</td> <!-- Định dạng thành tiền ở đây -->
+                                <td>
+                                    <form action="@Url.Action("Remove", "Cart", new { productId = item.ProductId })" method="post" style="display:inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?');">
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </form>
                                 </td>
                             </tr>
                         }
@@ -43,10 +47,10 @@
         <!-- Bên phải: Tạm tính và thanh toán -->
         <div class="col-lg-4">
             <h2 class="mb-4">Tóm tắt đơn hàng</h2>
-                <div class="card-body">
-                    <h5>Tổng tiền tạm tính: </h5>
-                    <button class="btn btn-success w-100" onclick="checkout()">Thanh toán</button>
-                </div>
+            <div class="card-body">
+                <h5>Tổng tiền tạm tính: @Model.Sum(item => item.Price * item.Quantity).ToString("C")</h5>
+                <button class="btn btn-success w-100" onclick="checkout()">Thanh toán</button>
+            </div>
         </div>
     </div>
 </div>

@@ -109,7 +109,7 @@
                                     <div class="card-body text-center">
                                         <h5 class="card-title title-limit">@item.TenSp</h5>
                                         <p class="card-text">@item.DonGiaBan.ToString("C") $</p>
-                                        <a href="@Url.Action("Index", "Cart", new { id = item.MaSp })" class="btn btn-success">Thêm vào giỏ</a>
+                                        <a href="@Url.Action("AddToCart", "Cart", new { productId = item.MaSp })" class="btn btn-success">Thêm vào giỏ</a>
                                     </div>
                                 </div>
                             </div>
