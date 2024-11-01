@@ -52,5 +52,25 @@ namespace BTL.Controllers
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
             return View(cart);
         }
+
+        public IActionResult Remove(int productId)
+        {
+            // Lấy giỏ hàng từ session
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+
+            // Tìm sản phẩm trong giỏ hàng
+            var itemToRemove = cart.FirstOrDefault(c => c.ProductId == productId);
+            if (itemToRemove != null)
+            {
+                cart.Remove(itemToRemove); // Xóa sản phẩm khỏi giỏ hàng
+            }
+
+            // Lưu giỏ hàng đã cập nhật lại vào session
+            HttpContext.Session.SetObjectAsJson("Cart", cart);
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

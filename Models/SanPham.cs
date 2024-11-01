@@ -21,7 +21,7 @@ public partial class SanPham
 
     public int? SoLuong { get; set; }
 
-    public byte[]? Anh { get; set; }
+    public string? Anh { get; set; }
 
     public DateTime? Hsd { get; set; }
 
