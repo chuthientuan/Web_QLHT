@@ -1,5 +1,68 @@
-﻿@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/LayoutKH.cshtml";
+﻿@model IEnumerable<BTL.Models.SanPham>
+
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+    Layout = "~/Views/Shared/LayoutKH.cshtml"; // Use your layout file
 }
 
+<h1>Danh sách sản phẩm</h1>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Đơn giá</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.TenSp</td>
+                        <td><img src="@product.Anh" alt="@product.TenSp" style="width: 50px;"></td>
+                        <td>@product.DonGiaBan.ToString("N0") VNĐ</td> <!-- Changed to VNĐ -->
+                        <td>@product.SoLuong</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@product.MaSp" class="btn btn-info">Xem chi tiết</a>
+                            <button class="btn btn-success" onclick="addToCart(@product.MaSp)">Thêm vào giỏ hàng</button>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center">Không có sản phẩm nào.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function addToCart(productId) {
+            // Implement logic to add the product to the shopping cart
+            // Example AJAX call (assuming you have an API endpoint set up)
+            $.ajax({
+                url: '/Cart/Add', // Adjust this to your actual endpoint
+                type: 'POST',
+                data: { id: productId },
+                success: function (response) {
+                    // Handle success (e.g., update cart count)
+                    alert("Sản phẩm đã được thêm vào giỏ hàng: " + productId);
+                },
+                error: function () {
+                    // Handle error
+                    alert("Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.");
+                }
+            });
+        }
+    </script>
+}
