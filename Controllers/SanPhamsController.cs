@@ -12,17 +12,41 @@ namespace BTL.Controllers
     public class SanPhamsController : Controller
     {
         private readonly QlhieuThuocContext _context;
-
+        private int pageSize = 15;
         public SanPhamsController(QlhieuThuocContext context)
         {
             _context = context;
         }
 
         // GET: SanPhams
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, int? loaiThuocId = null)
         {
-            var qlhieuThuocContext = _context.SanPhams.Include(s => s.MaLtNavigation);
-            return View(await qlhieuThuocContext.ToListAsync());
+            var query = _context.SanPhams.Include(s => s.MaLtNavigation).AsQueryable();
+
+            // Filter by LoaiThuoc if specified
+            if (loaiThuocId.HasValue)
+            {
+                query = query.Where(p => p.MaLt == loaiThuocId.Value);
+            }
+
+            // Pagination logic
+            var totalProducts = await query.CountAsync();
+            var totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+
+            var products = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            // Pass current page, total pages, and filter data to the view
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.LoaiThuocId = loaiThuocId;
+
+            // Pass list of LoaiThuoc for the filter dropdown
+            ViewBag.LoaiThuocs = await _context.LoaiThuocs.ToListAsync();
+
+            return View(products);
         }
 
         // GET: SanPhams/Details/5
