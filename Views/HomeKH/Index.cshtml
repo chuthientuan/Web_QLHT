@@ -2,3 +2,270 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/LayoutKH.cshtml";
 }
+
+<div class="container mt-5 pt-5">
+
+    <!-- Banner/Slider Section -->
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Banner lớn bên trái -->
+            <div class="col-lg-8 mb-3">
+                <div id="mainCarousel" class="carousel slide h-100" data-bs-ride="carousel">
+                    <div class="carousel-inner h-100">
+                        <div class="carousel-item active">
+                            <img src="~/images/Trang_chu/Banner/sl-1.webp" class="d-block w-100 h-100" alt="Banner lớn 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/images/Trang_chu/Banner/sl-2.webp" class="d-block w-100 h-100" alt="Banner lớn 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/images/Trang_chu/Banner/sl-3.jpg" class="d-block w-100 h-100" alt="Banner lớn 3">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/images/Trang_chu/Banner/sl-4.jpg" class="d-block w-100 h-100" alt="Banner lớn 4">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/images/Trang_chu/Banner/sl-5.jpg" class="d-block w-100 h-100" alt="Banner lớn 5">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hai banner nhỏ bên phải -->
+            <div class="col-lg-4 d-flex flex-column gap-3">
+                <div class="small-banner h-50">
+                    <img src="~/~/images/Trang_chu/Banner/bn-1.jpg" class="d-block w-100 h-100" alt="Banner nhỏ 1">
+                </div>
+                <div class="small-banner h-50">
+                    <img src="~/~/images/Trang_chu/Banner/bn-2.webp" class="d-block w-100 h-100" alt="Banner nhỏ 2">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: #f0f0f0; height: 20px;"></div>
+
+    <!-- Categories Section -->
+    <section class="my-5">
+        <h2 class="text-center mb-4">Danh mục sản phẩm</h2>
+        <div class="row text-center">
+            <div class="col-3">
+                <a href="duong-dan-den-danh-muc-duoc-pham.html">
+                    <img src="~/~/images/Trang_chu/Danh_muc/ct-1.webp" class="rounded-circle mb-2" alt="Dược phẩm"
+                         style="width: 100px;">
+                    <h5>Dược phẩm</h5>
+                </a>
+            </div>
+            <div class="col-3">
+                <a href="duong-dan-den-danh-muc-cham-soc-suc-khoe.html">
+                    <img src="~/~/images/Trang_chu/Danh_muc/ct-2.webp" class="rounded-circle mb-2" alt="Chăm sóc sức khỏe"
+                         style="width: 100px;">
+                    <h5>Chăm sóc sức khỏe</h5>
+                </a>
+            </div>
+            <div class="col-3">
+                <a href="duong-dan-den-danh-muc-thuc-pham-chuc-nang.html">
+                    <img src="~/~/images/Trang_chu/Danh_muc/ct-3.webp" class="rounded-circle mb-2"
+                         alt="Thực phẩm chức năng" style="width: 100px;">
+                    <h5>Thực phẩm chức năng</h5>
+                </a>
+            </div>
+            <div class="col-3">
+                <a href="duong-dan-den-danh-muc-thiet-bi-y-te.html">
+                    <img src="~/~/images/Trang_chu/Danh_muc/ct-4.webp" class="rounded-circle mb-2" alt="Thiết bị y tế"
+                         style="width: 100px;">
+                    <h5>Thiết bị y tế</h5>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div style="background-color: #f0f0f0; height: 20px;"></div>
+
+    <!-- Featured Products Section -->
+    <section class="my-5">
+        <h2 class="text-center mb-4">Thương hiệu Pharmacity - Chăm sóc toàn diện</h2>
+        <div id="product-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <!-- Danh sách sản phẩm đầu tiên -->
+                        <div class="col-md-2 product" style="display: inline-block;">
+                            <div class="card small-card">
+                                <img src="~/images/duocpham/Acetylcystein 200 Imexpharm (10 vỉ x 10 viên).webp"
+                                     class="card-img-top" alt="Sản phẩm 1">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title title-limit">Acetylcystein 200 Imexpharm (10 vỉ x 10 viên).</h5>
+                                    <p class="card-text">147,000 VND</p>
+                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 product" style="display: inline-block;">
+                            <div class="card small-card">
+                                <img src="~/images/duocpham/Acetylcystein 200mg Vidipha (Hộp 20 vỉ x 10 viên).jpg"
+                                     class="card-img-top" alt="Sản phẩm 2">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title title-limit">Acetylcystein 200mg Vidipha (Hộp 20 vỉ x 10 viên).</h5>
+                                    <p class="card-text">100,000 VND</p>
+                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 product" style="display: inline-block;">
+                            <div class="card small-card">
+                                <img src="~/images/duocpham/Katrypsin 8400Iu (Hộp 10 vỉ x10 viên).jpg"
+                                     class="card-img-top" alt="Sản phẩm 3">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title title-limit">Katrypsin 8400Iu (Hộp 10 vỉ x10 viên)</h5>
+                                    <p class="card-text">116,000 VND</p>
+                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 product" style="display: inline-block;">
+                            <div class="card small-card">
+                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
+                                     class="card-img-top" alt="Sản phẩm 4">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title title-limit">
+                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
+                                        Abbott Glucerna (850g)
+                                    </h5>
+                                    <p class="card-text">879,000 VND</p>
+                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 product" style="display: inline-block;">
+                            <div class="card small-card">
+                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
+                                     class="card-img-top" alt="Sản phẩm 5">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title title-limit">
+                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
+                                        Abbott Glucerna (850g)
+                                    </h5>
+                                    <p class="card-text">879,000 VND</p>
+                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 product" style="display: inline-block;">
+                            <div class="card small-card">
+                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
+                                     class="card-img-top" alt="Sản phẩm 6">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title title-limit">
+                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
+                                        Abbott Glucerna (850g)
+                                    </h5>
+                                    <p class="card-text">879,000 VND</p>
+                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <!-- Danh sách sản phẩm thứ hai -->
+                        <div class="col-md-2 product" style="display: inline-block;">
+                            <div class="card small-card">
+                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
+                                     class="card-img-top" alt="Sản phẩm 7">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title title-limit">
+                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
+                                        Abbott Glucerna (850g)
+                                    </h5>
+                                    <p class="card-text">879,000 VND</p>
+                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 product" style="display: inline-block;">
+                            <div class="card small-card">
+                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
+                                     class="card-img-top" alt="Sản phẩm 8">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title title-limit">
+                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
+                                        Abbott Glucerna (850g)
+                                    </h5>
+                                    <p class="card-text">879,000 VND</p>
+                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 product" style="display: inline-block;">
+                            <div class="card small-card">
+                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
+                                     class="card-img-top" alt="Sản phẩm 9">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title title-limit">
+                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
+                                        Abbott Glucerna (850g)
+                                    </h5>
+                                    <p class="card-text">879,000 VND</p>
+                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 product" style="display: inline-block;">
+                            <div class="card small-card">
+                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
+                                     class="card-img-top" alt="Sản phẩm 10">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title title-limit">
+                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
+                                        Abbott Glucerna (850g)
+                                    </h5>
+                                    <p class="card-text">879,000 VND</p>
+                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 product" style="display: inline-block;">
+                            <div class="card small-card">
+                                <img src="~/images/chamsocsuckhoe/Sữa bột dinh dưỡng cho người đái tháo đường hương Vani Abbott Glucerna (850g).webp"
+                                     class="card-img-top" alt="Sản phẩm 11">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title title-limit">
+                                        Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
+                                        Abbott Glucerna (850g)
+                                    </h5>
+                                    <p class="card-text">879,000 VND</p>
+                                    <a href="#" class="btn btn-success">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Thêm các carousel-item khác nếu cần -->
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#product-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#product-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+
+</div>
+
+<div style="background-color: #f0f0f0; height: 20px;"></div>

@@ -1,7 +1,10 @@
 using BTL.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace BTL.Controllers
 {
@@ -37,30 +40,50 @@ namespace BTL.Controllers
         public async Task<IActionResult> Index(string username, string password)
         {
             var user = await db.TaiKhoans
-            .Select(t => new TaiKhoan
-            {
-                MaTk = t.MaTk,
-                HoTen = t.HoTen ?? "Unknown",
-                Role = t.Role,
-                TenDangNhap = t.TenDangNhap,
-                MatKhau = t.MatKhau,
-                Email = t.Email ?? "N/A",
-                DienThoai = t.DienThoai ?? "N/A"
-            }).SingleOrDefaultAsync(u => u.TenDangNhap == username && u.MatKhau == password);
+                .Select(t => new TaiKhoan
+                {
+                    MaTk = t.MaTk,
+                    HoTen = t.HoTen ?? "Unknown",
+                    Role = t.Role,
+                    TenDangNhap = t.TenDangNhap,
+                    MatKhau = t.MatKhau,
+                    Email = t.Email ?? "N/A",
+                    DienThoai = t.DienThoai ?? "N/A"
+                }).SingleOrDefaultAsync(u => u.TenDangNhap == username && u.MatKhau == password);
+
             if (user != null)
             {
+                // Thêm Claims để lưu MaTk và Role
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.TenDangNhap),
+                    new Claim("MaTk", user.MaTk.ToString()),  // Lưu MaTk
+                    new Claim(ClaimTypes.Role, user.Role.ToString()) // Lưu Role
+                };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var authProperties = new AuthenticationProperties
+                {
+                    IsPersistent = true, // Đăng nhập duy trì
+                };
+
+                // Thiết lập cookie xác thực
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
                 if (user.Role == 1)
                 {
                     return RedirectToAction("Index", "SanPhams");
                 }
-                else 
+                else
                 {
                     return RedirectToAction("Index", "HomeKH");
                 }
             }
+
             ModelState.AddModelError(string.Empty, "Sai tên đăng nhập hoặc mật khẩu.");
             return View();
         }
+
 
         [HttpGet]
         public IActionResult DangKy()
