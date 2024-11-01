@@ -2,7 +2,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/LayoutKH.cshtml";
 }
-
+@model IEnumerable<SanPham>
 <div class="container mt-5 pt-5">
 
     <!-- Banner/Slider Section -->
@@ -44,10 +44,10 @@
             <!-- Hai banner nhỏ bên phải -->
             <div class="col-lg-4 d-flex flex-column gap-3">
                 <div class="small-banner h-50">
-                    <img src="~/~/images/Trang_chu/Banner/bn-1.jpg" class="d-block w-100 h-100" alt="Banner nhỏ 1">
+                    <img src="~/images/Trang_chu/Banner/bn-1.jpg" class="d-block w-100 h-100" alt="Banner nhỏ 1">
                 </div>
                 <div class="small-banner h-50">
-                    <img src="~/~/images/Trang_chu/Banner/bn-2.webp" class="d-block w-100 h-100" alt="Banner nhỏ 2">
+                    <img src="~/images/Trang_chu/Banner/bn-2.webp" class="d-block w-100 h-100" alt="Banner nhỏ 2">
                 </div>
             </div>
         </div>
@@ -61,28 +61,28 @@
         <div class="row text-center">
             <div class="col-3">
                 <a href="duong-dan-den-danh-muc-duoc-pham.html">
-                    <img src="~/~/images/Trang_chu/Danh_muc/ct-1.webp" class="rounded-circle mb-2" alt="Dược phẩm"
+                    <img src="~/images/Trang_chu/Danh_muc/ct-1.webp" class="rounded-circle mb-2" alt="Dược phẩm"
                          style="width: 100px;">
                     <h5>Dược phẩm</h5>
                 </a>
             </div>
             <div class="col-3">
                 <a href="duong-dan-den-danh-muc-cham-soc-suc-khoe.html">
-                    <img src="~/~/images/Trang_chu/Danh_muc/ct-2.webp" class="rounded-circle mb-2" alt="Chăm sóc sức khỏe"
+                    <img src="~/images/Trang_chu/Danh_muc/ct-2.webp" class="rounded-circle mb-2" alt="Chăm sóc sức khỏe"
                          style="width: 100px;">
                     <h5>Chăm sóc sức khỏe</h5>
                 </a>
             </div>
             <div class="col-3">
                 <a href="duong-dan-den-danh-muc-thuc-pham-chuc-nang.html">
-                    <img src="~/~/images/Trang_chu/Danh_muc/ct-3.webp" class="rounded-circle mb-2"
+                    <img src="~/images/Trang_chu/Danh_muc/ct-3.webp" class="rounded-circle mb-2"
                          alt="Thực phẩm chức năng" style="width: 100px;">
                     <h5>Thực phẩm chức năng</h5>
                 </a>
             </div>
             <div class="col-3">
                 <a href="duong-dan-den-danh-muc-thiet-bi-y-te.html">
-                    <img src="~/~/images/Trang_chu/Danh_muc/ct-4.webp" class="rounded-circle mb-2" alt="Thiết bị y tế"
+                    <img src="~/images/Trang_chu/Danh_muc/ct-4.webp" class="rounded-circle mb-2" alt="Thiết bị y tế"
                          style="width: 100px;">
                     <h5>Thiết bị y tế</h5>
                 </a>
@@ -100,13 +100,27 @@
                 <div class="carousel-item active">
                     <div class="row">
                         <!-- Danh sách sản phẩm đầu tiên -->
+                        @foreach(var item in Model)
+                        {
+                            <div class="col-md-2 product" style="display: inline-block;">
+                                <div class="card small-card">
+                                    <img src="~/images/duocpham/Acetylcystein 200 Imexpharm (10 vỉ x 10 viên).webp"
+                                         class="card-img-top" alt="Sản phẩm 1">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title title-limit">@item.TenSp</h5>
+                                        <p class="card-text">@item.DonGiaBan.ToString("C") $</p>
+                                        <a href="@Url.Action("Index", "Cart", new { id = item.MaSp })" class="btn btn-success">Thêm vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                         <div class="col-md-2 product" style="display: inline-block;">
                             <div class="card small-card">
                                 <img src="~/images/duocpham/Acetylcystein 200 Imexpharm (10 vỉ x 10 viên).webp"
                                      class="card-img-top" alt="Sản phẩm 1">
                                 <div class="card-body text-center">
                                     <h5 class="card-title title-limit">Acetylcystein 200 Imexpharm (10 vỉ x 10 viên).</h5>
-                                    <p class="card-text">147,000 VND</p>
+                                    <p class="card-text">147 $</p>
                                     <a href="#" class="btn btn-success">Xem chi tiết</a>
                                 </div>
                             </div>
@@ -117,7 +131,7 @@
                                      class="card-img-top" alt="Sản phẩm 2">
                                 <div class="card-body text-center">
                                     <h5 class="card-title title-limit">Acetylcystein 200mg Vidipha (Hộp 20 vỉ x 10 viên).</h5>
-                                    <p class="card-text">100,000 VND</p>
+                                    <p class="card-text">100 $</p>
                                     <a href="#" class="btn btn-success">Xem chi tiết</a>
                                 </div>
                             </div>
@@ -128,7 +142,7 @@
                                      class="card-img-top" alt="Sản phẩm 3">
                                 <div class="card-body text-center">
                                     <h5 class="card-title title-limit">Katrypsin 8400Iu (Hộp 10 vỉ x10 viên)</h5>
-                                    <p class="card-text">116,000 VND</p>
+                                    <p class="card-text">116 $</p>
                                     <a href="#" class="btn btn-success">Xem chi tiết</a>
                                 </div>
                             </div>
@@ -142,7 +156,7 @@
                                         Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
                                         Abbott Glucerna (850g)
                                     </h5>
-                                    <p class="card-text">879,000 VND</p>
+                                    <p class="card-text">879 $</p>
                                     <a href="#" class="btn btn-success">Xem chi tiết</a>
                                 </div>
                             </div>
@@ -156,7 +170,7 @@
                                         Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
                                         Abbott Glucerna (850g)
                                     </h5>
-                                    <p class="card-text">879,000 VND</p>
+                                    <p class="card-text">879 $</p>
                                     <a href="#" class="btn btn-success">Xem chi tiết</a>
                                 </div>
                             </div>
@@ -170,7 +184,7 @@
                                         Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
                                         Abbott Glucerna (850g)
                                     </h5>
-                                    <p class="card-text">879,000 VND</p>
+                                    <p class="card-text">879 $</p>
                                     <a href="#" class="btn btn-success">Xem chi tiết</a>
                                 </div>
                             </div>
@@ -189,7 +203,7 @@
                                         Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
                                         Abbott Glucerna (850g)
                                     </h5>
-                                    <p class="card-text">879,000 VND</p>
+                                    <p class="card-text">879 $</p>
                                     <a href="#" class="btn btn-success">Xem chi tiết</a>
                                 </div>
                             </div>
@@ -203,7 +217,7 @@
                                         Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
                                         Abbott Glucerna (850g)
                                     </h5>
-                                    <p class="card-text">879,000 VND</p>
+                                    <p class="card-text">879 $</p>
                                     <a href="#" class="btn btn-success">Xem chi tiết</a>
                                 </div>
                             </div>
@@ -217,7 +231,7 @@
                                         Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
                                         Abbott Glucerna (850g)
                                     </h5>
-                                    <p class="card-text">879,000 VND</p>
+                                    <p class="card-text">879 $</p>
                                     <a href="#" class="btn btn-success">Xem chi tiết</a>
                                 </div>
                             </div>
@@ -231,7 +245,7 @@
                                         Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
                                         Abbott Glucerna (850g)
                                     </h5>
-                                    <p class="card-text">879,000 VND</p>
+                                    <p class="card-text">879 $</p>
                                     <a href="#" class="btn btn-success">Xem chi tiết</a>
                                 </div>
                             </div>
@@ -245,7 +259,7 @@
                                         Sữa bột dinh dưỡng cho người đái tháo đường hương Vani
                                         Abbott Glucerna (850g)
                                     </h5>
-                                    <p class="card-text">879,000 VND</p>
+                                    <p class="card-text">879 $</p>
                                     <a href="#" class="btn btn-success">Xem chi tiết</a>
                                 </div>
                             </div>

@@ -15,6 +15,7 @@ namespace BTL
 
             // Thêm dịch vụ MVC
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSession();
 
             builder.Services.AddAuthentication("Cookies")
                 .AddCookie("Cookies", options =>
@@ -41,7 +42,7 @@ namespace BTL
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
