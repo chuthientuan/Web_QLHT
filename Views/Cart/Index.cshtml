@@ -2,14 +2,41 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/LayoutKH.cshtml";
 }
-
+@model IEnumerable<CartItem>
 <div class="container my-5 pt-5">
     <div class="row">
         <!-- Bên trái: Danh sách hàng hóa -->
         <div class="col-lg-8">
             <h1 class="text-center mb-4">Giỏ Hàng Của Bạn</h1>
+            <a asp-controller="HomeKH" asp-action="Index" class="btn btn-primary">Thêm Sản Phẩm</a>
             <div class="table-responsive">
-                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Hình ảnh</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td><img src="~/images/duocpham/@item.ImageUrl" style="width: 50px;" /></td>
+                                <td>@item.Price.ToString("C") $</td>
+                                <td>@item.Quantity</td>
+                                <td>@(item.Price * item.Quantity).ToString("C")</td>
+                                <td>
+                                    <a href="@Url.Action("Remove", "Cart", new { id = item.ProductId })" class="btn btn-danger">Xóa</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
 
