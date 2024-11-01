@@ -71,7 +71,7 @@ namespace BTL.Controllers
         // GET: SanPhams/Create
         public IActionResult Create()
         {
-            var imagesPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+            var imagesPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "image_products");
             var images = Directory.GetFiles(imagesPath).Select(Path.GetFileName).ToList();
 
             // Pass the list of images to the view
@@ -89,7 +89,7 @@ namespace BTL.Controllers
             if (ModelState.IsValid)
             {
                 // Set the image path (you may adjust this path as needed)
-                sanPham.Anh = Path.Combine("images", sanPham.Anh);
+                sanPham.Anh = Path.Combine("images/image_products", sanPham.Anh);
 
                 _context.Add(sanPham);
                 await _context.SaveChangesAsync(); // Make sure to await this call
@@ -98,7 +98,7 @@ namespace BTL.Controllers
 
             // Repopulate the dropdowns if the model state is invalid
             ViewBag.MaLt = new SelectList(_context.LoaiThuocs, "MaLt", "TenLt", sanPham.MaLt);
-            ViewBag.Anh = new SelectList(Directory.GetFiles("wwwroot/images").Select(Path.GetFileName).ToList());
+            ViewBag.Anh = new SelectList(Directory.GetFiles("wwwroot/images/image_products").Select(Path.GetFileName).ToList());
 
             return View(sanPham);
         }
@@ -116,6 +116,10 @@ namespace BTL.Controllers
             {
                 return NotFound();
             }
+            var imagesPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "image_products");
+            var images = Directory.GetFiles(imagesPath).Select(Path.GetFileName).ToList();
+            ViewBag.Anh = new SelectList(images, sanPham.Anh);
+
             ViewBag.MaLtNavigation = new SelectList(_context.LoaiThuocs, "MaLt", "TenLt", sanPham.MaLt);
             return View(sanPham);
         }
@@ -136,6 +140,7 @@ namespace BTL.Controllers
             {
                 try
                 {
+                    sanPham.Anh = Path.Combine("images/image_products", sanPham.Anh);
                     _context.Update(sanPham);
                     await _context.SaveChangesAsync();
                 }
@@ -153,6 +158,7 @@ namespace BTL.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MaLt"] = new SelectList(_context.LoaiThuocs, "MaLt", "TenLt", sanPham.MaLt);
+            ViewBag.Anh = new SelectList(Directory.GetFiles("wwwroot/images/image_products").Select(Path.GetFileName).ToList(), sanPham.Anh);
             return View(sanPham);
         }
 
