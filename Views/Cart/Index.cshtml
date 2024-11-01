@@ -2,3 +2,24 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/LayoutKH.cshtml";
 }
+
+<div class="container my-5 pt-5">
+    <div class="row">
+        <!-- Bên trái: Danh sách hàng hóa -->
+        <div class="col-lg-8">
+            <h1 class="text-center mb-4">Giỏ Hàng Của Bạn</h1>
+            <div class="table-responsive">
+                
+            </div>
+        </div>
+
+        <!-- Bên phải: Tạm tính và thanh toán -->
+        <div class="col-lg-4">
+            <h2 class="mb-4">Tóm tắt đơn hàng</h2>
+                <div class="card-body">
+                    <h5>Tổng tiền tạm tính: </h5>
+                    <button class="btn btn-success w-100" onclick="checkout()">Thanh toán</button>
+                </div>
+        </div>
+    </div>
+</div>
