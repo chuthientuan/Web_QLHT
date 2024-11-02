@@ -36,7 +36,8 @@ namespace BTL.Controllers
                     ProductId = product.MaSp,
                     ProductName = product.TenSp,
                     Price = product.DonGiaBan,
-                    Quantity = 1
+                    Quantity = 1,
+                    ImageUrl = product.Anh
                 });
             }
 

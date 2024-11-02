@@ -12,7 +12,7 @@ namespace BTL.Controllers
     public class SanPhamsController : Controller
     {
         private readonly QlhieuThuocContext _context;
-        private int pageSize = 15;
+        private int pageSize = 10;
         public SanPhamsController(QlhieuThuocContext context)
         {
             _context = context;

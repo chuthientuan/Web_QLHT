@@ -27,11 +27,11 @@
                             <tr>
                                 <td>@item.ProductName</td>
                                 <td>
-                                    <img src="~/images/duocpham/@item.ImageUrl" alt="@item.ProductName" style="width: 50px;" />
+                                    <img src="~/@item.ImageUrl" alt="@item.ProductName" style="width: 50px;" />
                                 </td>
-                                <td>@item.Price.ToString("C")</td>
-                                <td>@item.Quantity</td>
-                                <td>@((item.Price * item.Quantity).ToString("C"))</td> <!-- Định dạng thành tiền ở đây -->
+                                <td class="unit-price">@item.Price.ToString("C")</td>
+                                <td><input type="number" class="form-control quantity" value="@item.Quantity" min="1" onchange="updateTotal()"></td>
+                                <td class="subtotal">@((item.Price * item.Quantity).ToString("C"))</td>
                                 <td>
                                     <form action="@Url.Action("Remove", "Cart", new { productId = item.ProductId })" method="post" style="display:inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?');">
                                         <button type="submit" class="btn btn-danger">Xóa</button>
@@ -48,7 +48,7 @@
         <div class="col-lg-4">
             <h2 class="mb-4">Tóm tắt đơn hàng</h2>
             <div class="card-body">
-                <h5>Tổng tiền tạm tính: @Model.Sum(item => item.Price * item.Quantity).ToString("C")</h5>
+                <h5>Tổng tiền tạm tính: <span id="subtotal">@Model.Sum(item => item.Price * item.Quantity).ToString("C")</span></h5>
                 <button class="btn btn-success w-100" onclick="checkout()">Thanh toán</button>
             </div>
         </div>
