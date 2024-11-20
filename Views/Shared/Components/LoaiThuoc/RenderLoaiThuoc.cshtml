@@ -1,0 +1,20 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<LoaiThuoc>
+<form method="get" asp-action="Index" class="form-inline mb-3">
+    <label for="loaiThuocId" class="mr-2">Loại thuốc:</label>
+    <select name="loaiThuocId" id="loaiThuocId" class="form-control mr-2">
+        <option value="">Tất cả</option>
+        @foreach (var loai in ViewBag.LoaiThuocs)
+        {
+            <option value="@loai.MaLt"
+                    selected="@(loai.MaLt == ViewBag.LoaiThuocId ? "selected" : null)">
+                @loai.TenLt
+            </option>
+        }
+
+    </select>
+    <button type="submit" class="btn btn-primary">Lọc</button>
+</form>

@@ -5,34 +5,29 @@
     Layout = "~/Views/Shared/MyLayout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Tạo Chi Tiết Hóa Đơn Bán</h1>
 
-<h4>ChiTietHdb</h4>
+<h4>Chi Tiết Hóa Đơn Bán</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MaHdb" /> 
             <div class="form-group">
-                <label asp-for="MaSp" class="control-label"></label>
+                <label asp-for="MaSp" class="control-label">Tên thuốc</label>
                 <select asp-for="MaSp" class ="form-control" asp-items="ViewBag.MaSp"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Slban" class="control-label"></label>
+                <label asp-for="Slban" class="control-label">Số lượng bán</label>
                 <input asp-for="Slban" class="form-control" />
                 <span asp-validation-for="Slban" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Tạo" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-action="Index">Quay lại</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

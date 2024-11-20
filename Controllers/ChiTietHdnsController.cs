@@ -19,10 +19,15 @@ namespace BTL.Controllers
         }
 
         // GET: ChiTietHdns
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int maHdn)
         {
-            var qlhieuThuocContext = _context.ChiTietHdns.Include(c => c.MaHdnNavigation).Include(c => c.MaSpNavigation);
-            return View(await qlhieuThuocContext.ToListAsync());
+            var chiTietHdns = await _context.ChiTietHdns
+                .Include(c => c.MaSpNavigation) // Include product details if necessary
+                .Where(c => c.MaHdn == maHdn) // Filter by the provided maHdn
+                .ToListAsync();
+
+            ViewBag.MaHdn = maHdn; // Make maHdn available to the view
+            return View(chiTietHdns); // Return the list of details
         }
 
         // GET: ChiTietHdns/Details/5
@@ -46,11 +51,11 @@ namespace BTL.Controllers
         }
 
         // GET: ChiTietHdns/Create
-        public IActionResult Create()
+        public IActionResult Create(int maHdn)
         {
-            ViewData["MaHdn"] = new SelectList(_context.HoaDonNhaps, "MaHdn", "MaHdn");
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp");
-            return View();
+            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "TenSp");
+            var chiTietHdn = new ChiTietHdn { MaHdn = maHdn }; // Initialize with the provided maHdn
+            return View(chiTietHdn);
         }
 
         // POST: ChiTietHdns/Create
@@ -64,28 +69,25 @@ namespace BTL.Controllers
             {
                 _context.Add(chiTietHdn);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { maHdn = chiTietHdn.MaHdn });
             }
-            ViewData["MaHdn"] = new SelectList(_context.HoaDonNhaps, "MaHdn", "MaHdn", chiTietHdn.MaHdn);
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp", chiTietHdn.MaSp);
+            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "TenSp", chiTietHdn.MaSp);
             return View(chiTietHdn);
         }
 
         // GET: ChiTietHdns/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int maHdn, int maSp)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var chiTietHdn = await _context.ChiTietHdns
+                .Include(c => c.MaHdnNavigation)
+                .Include(c => c.MaSpNavigation)
+                .FirstOrDefaultAsync(m => m.MaHdn == maHdn && m.MaSp == maSp);
 
-            var chiTietHdn = await _context.ChiTietHdns.FindAsync(id);
             if (chiTietHdn == null)
             {
                 return NotFound();
             }
-            ViewData["MaHdn"] = new SelectList(_context.HoaDonNhaps, "MaHdn", "MaHdn", chiTietHdn.MaHdn);
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp", chiTietHdn.MaSp);
+
             return View(chiTietHdn);
         }
 
@@ -94,9 +96,9 @@ namespace BTL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaHdn,MaSp,Slnhap")] ChiTietHdn chiTietHdn)
+        public async Task<IActionResult> Edit(int maHdn, int maSp, ChiTietHdn chiTietHdn)
         {
-            if (id != chiTietHdn.MaHdn)
+            if (maHdn != chiTietHdn.MaHdn || maSp != chiTietHdn.MaSp)
             {
                 return NotFound();
             }
@@ -107,10 +109,12 @@ namespace BTL.Controllers
                 {
                     _context.Update(chiTietHdn);
                     await _context.SaveChangesAsync();
+                    // Redirect to Index with the maHdb parameter
+                    return RedirectToAction(nameof(Index), new { maHdn = chiTietHdn.MaHdn });
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ChiTietHdnExists(chiTietHdn.MaHdn))
+                    if (!ChiTietHdnExists(maHdn, maSp))
                     {
                         return NotFound();
                     }
@@ -119,14 +123,16 @@ namespace BTL.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["MaHdn"] = new SelectList(_context.HoaDonNhaps, "MaHdn", "MaHdn", chiTietHdn.MaHdn);
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp", chiTietHdn.MaSp);
+
             return View(chiTietHdn);
         }
+        private bool ChiTietHdnExists(int maHdn, int maSp)
+        {
+            return _context.ChiTietHdns.Any(e => e.MaHdn == maHdn && e.MaSp == maSp);
+        }
 
-        // GET: ChiTietHdns/Delete/5
+        // GET: ChiTietHdns/Delete/maHdn/maSp
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,17 +155,22 @@ namespace BTL.Controllers
         // POST: ChiTietHdns/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int maHdn, int maSp)
         {
-            var chiTietHdn = await _context.ChiTietHdns.FindAsync(id);
+            var chiTietHdn = await _context.ChiTietHdns
+                .Include(c => c.MaHdnNavigation)
+                .Include(c => c.MaSpNavigation)
+                .FirstOrDefaultAsync(m => m.MaHdn == maHdn && m.MaSp == maSp);
+
             if (chiTietHdn != null)
             {
                 _context.ChiTietHdns.Remove(chiTietHdn);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool ChiTietHdnExists(int id)
         {

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<BTL.Models.SanPham>
+
+@if (!Model.Any())
+{
+    <p>Không có sản phẩm nào.</p>
+}
+else
+{
+    <div class="product-list">
+        @foreach (var sanpham in Model)
+        {
+            <div class="product-item">
+                <h3>@sanpham.TenSp</h3>
+                <p>Giá: @sanpham.DonGiaBan.ToString("N0") $</p>
+                <img src="@sanpham.Anh" alt="@sanpham.TenSp" />
+                <!-- Add other product details as needed -->
+            </div>
+        }
+    </div>
+}

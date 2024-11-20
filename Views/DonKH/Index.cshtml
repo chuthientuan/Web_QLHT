@@ -1,4 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿@model IEnumerable<BTL.Models.HoaDonBan>
+
+@{
+    ViewData["Title"] = "Đơn Hàng Bán";
     Layout = "~/Views/Shared/LayoutKH.cshtml";
+}
+
+<h1>Danh sách đơn hàng bán</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ngày</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaHdb</td>
+                <td>@item.NgayBan</td>
+                <td>@item.TrangThai</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.MaHdb">Xem chi tiết</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p>Không có đơn hàng nào.</p>
 }

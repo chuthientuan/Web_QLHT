@@ -19,11 +19,18 @@ namespace BTL.Controllers
         }
 
         // GET: ChiTietHdbs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int maHdb)
         {
-            var qlhieuThuocContext = _context.ChiTietHdbs.Include(c => c.MaHdbNavigation).Include(c => c.MaSpNavigation);
-            return View(await qlhieuThuocContext.ToListAsync());
+            var chiTietHdbs = await _context.ChiTietHdbs
+                .Include(c => c.MaSpNavigation) // Include product details if necessary
+                .Where(c => c.MaHdb == maHdb) // Filter by the provided maHdb
+                .ToListAsync();
+
+            ViewBag.MaHdb = maHdb; // Make maHdb available to the view
+            return View(chiTietHdbs); // Return the list of details
         }
+
+
 
         // GET: ChiTietHdbs/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -46,12 +53,14 @@ namespace BTL.Controllers
         }
 
         // GET: ChiTietHdbs/Create
-        public IActionResult Create()
+        public IActionResult Create(int maHdb)
         {
-            ViewData["MaHdb"] = new SelectList(_context.HoaDonBans, "MaHdb", "MaHdb");
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp");
-            return View();
+            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "TenSp");
+            var chiTietHdb = new ChiTietHdb { MaHdb = maHdb }; // Initialize with the provided maHdb
+            return View(chiTietHdb);
         }
+
+
 
         // POST: ChiTietHdbs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -64,39 +73,35 @@ namespace BTL.Controllers
             {
                 _context.Add(chiTietHdb);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { maHdb = chiTietHdb.MaHdb });
             }
-            ViewData["MaHdb"] = new SelectList(_context.HoaDonBans, "MaHdb", "MaHdb", chiTietHdb.MaHdb);
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp", chiTietHdb.MaSp);
+            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "TenSp", chiTietHdb.MaSp);
             return View(chiTietHdb);
         }
 
-        // GET: ChiTietHdbs/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var chiTietHdb = await _context.ChiTietHdbs.FindAsync(id);
+        // GET: ChiTietHdb/Edit/5
+        public async Task<IActionResult> Edit(int maHdb, int maSp)
+        {
+            var chiTietHdb = await _context.ChiTietHdbs
+                .Include(c => c.MaHdbNavigation)
+                .Include(c => c.MaSpNavigation)
+                .FirstOrDefaultAsync(m => m.MaHdb == maHdb && m.MaSp == maSp);
+
             if (chiTietHdb == null)
             {
                 return NotFound();
             }
-            ViewData["MaHdb"] = new SelectList(_context.HoaDonBans, "MaHdb", "MaHdb", chiTietHdb.MaHdb);
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp", chiTietHdb.MaSp);
+
             return View(chiTietHdb);
         }
 
-        // POST: ChiTietHdbs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: ChiTietHdb/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaHdb,MaSp,Slban")] ChiTietHdb chiTietHdb)
+        public async Task<IActionResult> Edit(int maHdb, int maSp, ChiTietHdb chiTietHdb)
         {
-            if (id != chiTietHdb.MaHdb)
+            if (maHdb != chiTietHdb.MaHdb || maSp != chiTietHdb.MaSp)
             {
                 return NotFound();
             }
@@ -107,10 +112,12 @@ namespace BTL.Controllers
                 {
                     _context.Update(chiTietHdb);
                     await _context.SaveChangesAsync();
+                    // Redirect to Index with the maHdb parameter
+                    return RedirectToAction(nameof(Index), new { maHdb = chiTietHdb.MaHdb });
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ChiTietHdbExists(chiTietHdb.MaHdb))
+                    if (!ChiTietHdbExists(maHdb, maSp))
                     {
                         return NotFound();
                     }
@@ -119,12 +126,17 @@ namespace BTL.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["MaHdb"] = new SelectList(_context.HoaDonBans, "MaHdb", "MaHdb", chiTietHdb.MaHdb);
-            ViewData["MaSp"] = new SelectList(_context.SanPhams, "MaSp", "MaSp", chiTietHdb.MaSp);
+
             return View(chiTietHdb);
         }
+
+        // This function checks if a ChiTietHdb exists based on the composite key
+        private bool ChiTietHdbExists(int maHdb, int maSp)
+        {
+            return _context.ChiTietHdbs.Any(e => e.MaHdb == maHdb && e.MaSp == maSp);
+        }
+
 
         // GET: ChiTietHdbs/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -149,17 +161,22 @@ namespace BTL.Controllers
         // POST: ChiTietHdbs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int maHdb, int maSp)
         {
-            var chiTietHdb = await _context.ChiTietHdbs.FindAsync(id);
+            var chiTietHdb = await _context.ChiTietHdbs
+                .Include(c => c.MaHdbNavigation)
+                .Include(c => c.MaSpNavigation)
+                .FirstOrDefaultAsync(m => m.MaHdb == maHdb && m.MaSp == maSp);
+
             if (chiTietHdb != null)
             {
                 _context.ChiTietHdbs.Remove(chiTietHdb);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool ChiTietHdbExists(int id)
         {

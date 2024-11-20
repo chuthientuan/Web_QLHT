@@ -2,3 +2,152 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/LayoutKH.cshtml";
 }
+@model IEnumerable<SanPham>
+<div class="container mt-5 pt-5">
+
+    <!-- Banner/Slider Section -->
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Banner lớn bên trái -->
+            <div class="col-lg-8 mb-3">
+                <div id="mainCarousel" class="carousel slide h-100" data-bs-ride="carousel">
+                    <div class="carousel-inner h-100">
+                        <div class="carousel-item active mySlides">
+                            <img src="~/images/Trang_chu/Banner/sl-1.webp" class="d-block w-100 h-100" alt="Banner lớn 1">
+                        </div>
+                        <div class="carousel-item mySlides">
+                            <img src="~/images/Trang_chu/Banner/sl-2.webp" class="d-block w-100 h-100" alt="Banner lớn 2">
+                        </div>
+                        <div class="carousel-item mySlides">
+                            <img src="~/images/Trang_chu/Banner/sl-3.jpg" class="d-block w-100 h-100" alt="Banner lớn 3">
+                        </div>
+                        <div class="carousel-item mySlides">
+                            <img src="~/images/Trang_chu/Banner/sl-4.jpg" class="d-block w-100 h-100" alt="Banner lớn 4">
+                        </div>
+                        <div class="carousel-item mySlides">
+                            <img src="~/images/Trang_chu/Banner/sl-5.jpg" class="d-block w-100 h-100" alt="Banner lớn 5">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hai banner nhỏ bên phải -->
+            <div class="col-lg-4 d-flex flex-column gap-3">
+                <div class="small-banner h-50">
+                    <img src="~/images/Trang_chu/Banner/bn-1.jpg" class="d-block w-100 h-100" alt="Banner nhỏ 1">
+                </div>
+                <div class="small-banner h-50">
+                    <img src="~/images/Trang_chu/Banner/bn-2.webp" class="d-block w-100 h-100" alt="Banner nhỏ 2">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: #f0f0f0; height: 20px;"></div>
+
+    <!-- Categories Section -->
+    <section class="my-5">
+        <h2 class="text-center mb-4">Danh mục sản phẩm</h2>
+        <div class="row text-center">
+            <div class="col-4">
+                <a href="#dp" style="text-decoration: none">
+                    <img src="~/images/Trang_chu/Danh_muc/ct-1.webp" class="rounded-circle mb-2" alt="Dược phẩm"
+                         style="width: 100px;">
+                    <h5>Dược phẩm</h5>
+                </a>
+            </div>
+            <div class="col-4">
+                <a href="#cssk" style="text-decoration: none">
+                    <img src="~/images/Trang_chu/Danh_muc/ct-2.webp" class="rounded-circle mb-2" alt="Chăm sóc sức khỏe"
+                         style="width: 100px;">
+                    <h5>Chăm sóc sức khỏe</h5>
+                </a>
+            </div>
+            <div class="col-4">
+                <a href="#tpcn" style="text-decoration: none">
+                    <img src="~/images/Trang_chu/Danh_muc/ct-3.webp" class="rounded-circle mb-2"
+                         alt="Thực phẩm chức năng" style="width: 100px;">
+                    <h5>Thực phẩm chức năng</h5>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div style="background-color: #f0f0f0; height: 20px;"></div>
+
+    <!-- Featured Products Section -->
+    <section id="dp" class="my-5">
+        <h2 class="text-center mb-4">Dược Phẩm</h2>
+        <div id="duocPharmCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        @foreach (var item in Model.Where(p => p.MaLt == 1))
+                        {
+                            <div class="col-md-2 product">
+                                <div class="card small-card">
+                                    <img src="~/@item.Anh" class="card-img-top" alt="@item.TenSp">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title title-limit">@item.TenSp</h5>
+                                        <p class="card-text">@item.DonGiaBan.ToString("C")</p>
+                                        <a href="@Url.Action("AddToCart", "Cart", new { productId = item.MaSp })" class="btn btn-success">Thêm vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="cssk" class="my-5">
+        <h2 class="text-center mb-4">Chăm Sóc Sức Khỏe</h2>
+        <div id="chamSocCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        @foreach (var item in Model.Where(p => p.MaLt == 2))
+                        {
+                            <div class="col-md-2 product">
+                                <div class="card small-card">
+                                    <img src="~/@item.Anh" class="card-img-top" alt="@item.TenSp">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title title-limit">@item.TenSp</h5>
+                                        <p class="card-text">@item.DonGiaBan.ToString("C")</p>
+                                        <a href="@Url.Action("AddToCart", "Cart", new { productId = item.MaSp })" class="btn btn-success">Thêm vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="tpcn" class="my-5">
+        <h2 class="text-center mb-4">Thực Phẩm Chức Năng</h2>
+        <div id="chamSocCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        @foreach (var item in Model.Where(p => p.MaLt == 3))
+                        {
+                            <div class="col-md-2 product">
+                                <div class="card small-card">
+                                    <img src="~/@item.Anh" class="card-img-top" alt="@item.TenSp">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title title-limit">@item.TenSp</h5>
+                                        <p class="card-text">@item.DonGiaBan.ToString("C")</p>
+                                        <a href="@Url.Action("AddToCart", "Cart", new { productId = item.MaSp })" class="btn btn-success">Thêm vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div style="background-color: #f0f0f0; height: 20px;"></div>

@@ -15,7 +15,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="MaHdn" />
             <div class="form-group">
-                <label asp-for="MaNcc" class="control-label">Tên nhà cung cấp</label>
+                <label asp-for="MaNcc" class="control-label">Nhà cung cấp</label>
                 <select asp-for="MaNcc" class="form-control" asp-items="ViewBag.MaNcc"></select>
                 <span asp-validation-for="MaNcc" class="text-danger"></span>
             </div>
@@ -31,7 +31,3 @@
         </form>
     </div>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

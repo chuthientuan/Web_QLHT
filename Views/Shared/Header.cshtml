@@ -1,18 +1,18 @@
 ﻿<header class="bg-primary fixed-top">
     <div class="container d-flex align-items-center justify-content-between py-2">
-        <a asp-action="Index" asp-controller="Home">
-            <img src="images/logo.svg" alt="Logo" class="header-img" style="width: 10rem; cursor: pointer;">
+        <a asp-action="Index" asp-controller="HomeKH">
+            <img src="~/images/logo.svg" alt="Logo" class="header-img" style="width: 10rem; cursor: pointer;">
         </a>
         <ul class="nav me-auto">
             <li class="nav-item">
-                <a asp-controller="HomeKH" class="nav-link text-white">Trang chủ</a>
+                <a asp-controller="HomeKH" asp-action="Index" class="nav-link text-white">Trang chủ</a>
             </li>
             <li class="nav-item dropdown">
-                <a asp-controller="DanhMuc" class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown">Danh mục</a>
+                <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown">Danh mục</a>
                 <ul class="dropdown-menu">
-                    <li><a asp-action="DuocPham" class="dropdown-item">Dược phẩm</a></li>
-                    <li><a asp-action="ChamSocSucKhoe" class="dropdown-item">Chăm sóc sức khỏe</a></li>
-                    <li><a asp-action="ThucPhamChucNang" class="dropdown-item">Thực phẩm chức năng</a></li>
+                    <li><a asp-controller="SanPhamKH" class="dropdown-item">Dược phẩm</a></li>
+                    <li><a asp-controller="SanPhamKH" class="dropdown-item">Chăm sóc sức khỏe</a></li>
+                    <li><a asp-controller="SanPhamKH" class="dropdown-item">Thực phẩm chức năng</a></li>
                 </ul>
             </li>
             <li class="nav-item">

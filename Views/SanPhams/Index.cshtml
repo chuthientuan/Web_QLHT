@@ -5,14 +5,15 @@
     Layout = "~/Views/Shared/MyLayout.cshtml";
 }
 
-<h1>Danh Sách Thuốc</h1>
+<h1>Danh Sách Sản Phẩm</h1>
 
-<a asp-action="Create" class="btn btn-primary">Thêm thuốc mới</a>
+<a asp-action="Create" class="btn btn-primary">Thêm sản phẩm mới</a>
+@await Component.InvokeAsync("LoaiThuoc")
 <table class="table">
     <thead>
         <tr>
             <th>
-                Tên Thuốc
+                Tên Sản Phẩm
             </th>
             <th>
                 Loại Thuốc
@@ -51,19 +52,19 @@
                         @Html.DisplayFor(modelItem => item.MaLtNavigation.TenLt)
                 </td>
                 <td>
-                        @Html.DisplayFor(modelItem => item.DonGiaNhap)
+                        @Html.DisplayFor(modelItem => item.DonGiaNhap) $
                 </td>
                 <td>
                         @Html.DisplayFor(modelItem => item.MoTa)
                 </td>
                 <td>
-                        @Html.DisplayFor(modelItem => item.DonGiaBan)
+                        @Html.DisplayFor(modelItem => item.DonGiaBan) $
                 </td>
                 <td>
                         @Html.DisplayFor(modelItem => item.SoLuong)
                 </td>
                 <td>
-                        @Html.DisplayFor(modelItem => item.Anh)
+                    <img src="@Url.Content("~/" + item.Anh)" alt="Selected Image" class="img-thumbnail" style=""/>
                 </td>
                 <td>
                         @Html.DisplayFor(modelItem => item.Hsd)
@@ -75,3 +76,13 @@
         }
     </tbody>
 </table>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+            </li>
+        }
+    </ul>
+</nav>

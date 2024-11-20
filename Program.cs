@@ -1,4 +1,4 @@
-using BTL.Models; // Đảm bảo namespace đúng
+using BTL.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BTL
@@ -15,8 +15,19 @@ namespace BTL
 
             // Thêm dịch vụ MVC
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSession();
+
+            builder.Services.AddAuthentication("Cookies")
+                .AddCookie("Cookies", options =>
+                {
+                    options.LoginPath = "/Home/Index"; // Đường dẫn tới trang đăng nhập
+                    options.AccessDeniedPath = "/Home/AccessDenied"; // Đường dẫn tới trang từ chối truy cập
+                });
 
             var app = builder.Build();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             // Cấu hình middleware
             if (app.Environment.IsDevelopment())
@@ -31,7 +42,7 @@ namespace BTL
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

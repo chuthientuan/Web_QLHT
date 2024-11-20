@@ -4,43 +4,37 @@
             <i class="bi bi-grid"></i>
         </a>
         <a class="sidebar-link">
-            <img src="images/logo.svg" alt="Logo" class="header-img" style="width: 10rem; cursor: pointer;">
+            <img src="~/images/logo.svg" alt="Logo" class="header-img" style="width: 10rem; cursor: pointer;">
         </a>
 
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-item">
-            <a asp-controller="SanPhams" class="sidebar-link">
+            <a asp-controller="SanPhams" asp-action="Index" class="sidebar-link">
                 <i class="bi bi-box"></i>
                 <span>Quản lý sản phẩm</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a asp-controller="TaiKhoans" class="sidebar-link">
+            <a asp-controller="TaiKhoans" asp-action="Index" class="sidebar-link">
                 <i class="bi bi-person"></i>
                 <span>Quản lý người dùng</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a asp-controller="HoaDonBans" class="sidebar-link">
+            <a asp-controller="HoaDonBans" asp-action="Index" class="sidebar-link">
                 <i class="bi bi-archive-fill"></i>
                 <span>Quản lý đơn hàng bán</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a asp-controller="HoaDonNhaps" class="sidebar-link">
+            <a asp-controller="HoaDonNhaps" asp-action="Index" class="sidebar-link">
                 <i class="bi bi-file-earmark-arrow-down"></i> 
                 <span>Quản lý đơn hàng nhập</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a asp-controller="Settings" class="sidebar-link">
-                <i class="bi bi-graph-up-arrow"></i>
-                <span>Báo cáo</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a asp-controller="Home" class="sidebar-link">
+            <a asp-controller="Home" asp-action="Index" class="sidebar-link">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Đăng xuất</span>
             </a>

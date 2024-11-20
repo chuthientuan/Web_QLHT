@@ -62,9 +62,7 @@
                 @Html.DisplayFor(modelItem => item.DienThoai)
             </td>
             <td>
-                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.MaTk">Sửa</a> |
-                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.MaTk">Thông tin</a> |
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.MaTk">Xóa</a>
+                <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.MaTk">Xem</a>
             </td>
         </tr>
 }

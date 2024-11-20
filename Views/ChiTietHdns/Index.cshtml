@@ -3,46 +3,51 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/MyLayout.cshtml";
+    decimal totalAmount = 0;
 }
 
-<h1>Index</h1>
+<h1>Chi Tiết Hóa Đơn Nhập</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<a asp-action="Create" asp-route-maHdn="@ViewBag.MaHdn" class="btn btn-primary">Tạo mới</a>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MaHdn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaSp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Slnhap)
-            </th>
+            <th>Tên Sản Phẩm</th>
+            <th>Số Lượng Nhập</th>
+            <th>Tổng Tiền</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>   
+        @foreach (var item in Model)
+        {
+            decimal itemTotal = (item.MaSpNavigation.DonGiaNhap * (item.Slnhap ?? 0)); // Calculate total for this item
+            totalAmount += itemTotal; // Accumulate total amount
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSpNavigation.TenSp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Slnhap)
+                </td>
+                <td>
+                    @itemTotal.ToString("C0")
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { maHdn = item.MaHdn, maSp = item.MaSp })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaHdn })
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td><strong>Thành tiền</strong></td>
+            <td></td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaHdn)
+                <strong>@totalAmount.ToString("C0")</strong> <!-- Display total amount -->
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaSp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Slnhap)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+            <td></td>
         </tr>
-}
     </tbody>
 </table>

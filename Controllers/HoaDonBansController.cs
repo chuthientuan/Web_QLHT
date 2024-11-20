@@ -22,9 +22,7 @@ namespace BTL.Controllers
         public async Task<IActionResult> Index()
         {
             var qlhieuThuocContext = _context.HoaDonBans
-                .Include(h => h.MaTkNavigation)
-                .Include(h => h.ChiTietHdbs)
-                .ThenInclude(ct => ct.MaSpNavigation); 
+                .Include(h => h.MaTkNavigation);
             return View(await qlhieuThuocContext.ToListAsync());
         }
 
@@ -37,10 +35,9 @@ namespace BTL.Controllers
             }
 
             var hoaDonBan = await _context.HoaDonBans
-                .Include(h => h.MaTkNavigation)
-                .Include(h => h.ChiTietHdbs)
-                .ThenInclude(ct => ct.MaSpNavigation)
-                .FirstOrDefaultAsync(m => m.MaHdb == id);
+            .Include(h => h.MaTkNavigation)
+            .FirstOrDefaultAsync(m => m.MaHdb == id);
+
             if (hoaDonBan == null)
             {
                 return NotFound();
@@ -52,9 +49,24 @@ namespace BTL.Controllers
         // GET: HoaDonBans/Create
         public IActionResult Create()
         {
-            ViewData["MaTk"] = new SelectList(_context.TaiKhoans, "MaTk", "MaTk");
-            return View();
+            var hoaDonBan = new HoaDonBan
+            {
+                TrangThai = "Thành công",
+                NgayBan = DateTime.Today
+            };
+
+            ViewBag.MaTk = new SelectList(_context.TaiKhoans, "MaTk", "HoTen");
+            ViewBag.TrangThaiList = new List<SelectListItem>
+                {
+                    new SelectListItem { Value = "Đang chờ", Text = "Đang chờ" },
+                    new SelectListItem { Value = "Thành công", Text = "Thành công", Selected = true },
+                    new SelectListItem { Value = "Đã hủy", Text = "Đã hủy" }
+                };
+            return View(hoaDonBan);
         }
+
+
+
 
         // POST: HoaDonBans/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -67,9 +79,9 @@ namespace BTL.Controllers
             {
                 _context.Add(hoaDonBan);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index","ChiTietHdbs");
             }
-            ViewData["MaTk"] = new SelectList(_context.TaiKhoans, "MaTk", "MaTk", hoaDonBan.MaTk);
+            ViewData["MaTk"] = new SelectList(_context.TaiKhoans, "MaTk", "HoTen");
             return View(hoaDonBan);
         }
 
@@ -81,21 +93,35 @@ namespace BTL.Controllers
                 return NotFound();
             }
 
-            var hoaDonBan = await _context.HoaDonBans.FindAsync(id);
+            var hoaDonBan = await _context.HoaDonBans
+                .Include(h => h.MaTkNavigation) // Optional, if you need to display customer details
+                .FirstOrDefaultAsync(m => m.MaHdb == id);
+
             if (hoaDonBan == null)
             {
                 return NotFound();
             }
-            ViewData["MaTk"] = new SelectList(_context.TaiKhoans, "MaTk", "MaTk", hoaDonBan.MaTk);
+
+            // Populate ViewBag for SelectLists
+            ViewBag.MaTk = new SelectList(_context.TaiKhoans, "MaTk", "HoTen", hoaDonBan.MaTk);
+            ViewBag.TrangThaiList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "Đang chờ", Text = "Đang chờ" },
+                new SelectListItem { Value = "Thành công", Text = "Thành công", Selected = hoaDonBan.TrangThai == "Thành công" },
+                new SelectListItem { Value = "Đã hủy", Text = "Đã hủy", Selected = hoaDonBan.TrangThai == "Đã hủy" }
+            };
+
             return View(hoaDonBan);
         }
+
+
 
         // POST: HoaDonBans/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaHdb,NgayBan,TrangThai,MaTk")] HoaDonBan hoaDonBan)
+        public async Task<IActionResult> Edit(int id, [Bind("MaHdb,MaSp,NgayBan,TrangThai,MaTk")] HoaDonBan hoaDonBan)
         {
             if (id != hoaDonBan.MaHdb)
             {
@@ -122,7 +148,7 @@ namespace BTL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaTk"] = new SelectList(_context.TaiKhoans, "MaTk", "MaTk", hoaDonBan.MaTk);
+            ViewData["MaTk"] = new SelectList(_context.TaiKhoans, "MaTk", "Hoten", hoaDonBan.MaTk);
             return View(hoaDonBan);
         }
 

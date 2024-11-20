@@ -2,3 +2,55 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/LayoutKH.cshtml";
 }
+@model IEnumerable<CartItem>
+<div class="container my-5 pt-5">
+    <div class="row">
+        <!-- Bên trái: Danh sách hàng hóa -->
+        <div class="col-lg-8">
+            <h1 class="text-center mb-4">Giỏ Hàng Của Bạn</h1>
+            <a asp-controller="HomeKH" asp-action="Index" class="btn btn-primary">Thêm Sản Phẩm</a>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Hình ảnh</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>
+                                    <img src="~/@item.ImageUrl" alt="@item.ProductName" style="width: 50px;" />
+                                </td>
+                                <td class="unit-price">@item.Price.ToString("C")</td>
+                                <td><input type="number" class="form-control quantity" value="@item.Quantity" min="1" onchange="updateTotal()"></td>
+                                <td class="subtotal">@((item.Price * item.Quantity).ToString("C"))</td>
+                                <td>
+                                    <form action="@Url.Action("Remove", "Cart", new { productId = item.ProductId })" method="post" style="display:inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?');">
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bên phải: Tạm tính và thanh toán -->
+        <div class="col-lg-4">
+            <h2 class="mb-4">Tóm tắt đơn hàng</h2>
+            <div class="card-body">
+                <h5>Tổng tiền tạm tính: <span id="subtotal">@Model.Sum(item => item.Price * item.Quantity).ToString("C")</span></h5>
+                <button class="btn btn-success w-100" onclick="checkout()">Thanh toán</button>
+            </div>
+        </div>
+    </div>
+</div>
